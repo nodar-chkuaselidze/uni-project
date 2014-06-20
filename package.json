@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
+  "private": "true",
   "dependencies": {
+    "debug": "^1.0.2",
     "express": "^4.4.3",
     "gulp": "^3.8.1",
     "lodash": "^2.4.1",
