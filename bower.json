@@ -1,0 +1,17 @@
+{
+  "name": "quizEngine",
+  "version": "0.0.0",
+  "authors": [
+    "Nodari Chkuaselidze <nodar.chkuaselidze@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ]
+}
