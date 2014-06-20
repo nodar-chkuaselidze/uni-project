@@ -4,17 +4,21 @@ var gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
     watch = require('gulp-watch');
 
-gulp.task('default', function() {
-  
-  gulp.src('scss/**', { read: false })
+gulp.task('sass-watch', function () {
+  gulp.src('./public/scss/**', { read: false })
       .pipe(watch())
       .pipe(plumber()) // This will keeps pipes working after error event
       .pipe(sass())
-      .pipe(gulp.dest('./dist/'));
+      .pipe(gulp.dest('./public/css/'));
+});
 
+gulp.task('nodemon', function () {
   nodemon({ script: 'app.js', ext: 'js' })
     .on('exit', function () {
       console.log('Application exited');
       process.exit();
     });
+});
+
+gulp.task('default', ['sass-watch', 'nodemon'], function() {
 });
