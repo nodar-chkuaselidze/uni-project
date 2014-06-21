@@ -59,9 +59,7 @@ function changeStack(e) {
   });
 
   stack = stack.join('\n');
-  console.log(stack);
-
-  process.exit();
+  e.stack = stack;
 
   return e;
 }
