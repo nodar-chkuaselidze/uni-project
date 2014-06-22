@@ -1,18 +1,25 @@
 'use strict';
 
-define([ 'express', 'nconf', 'cookie-parser', 'express-session', 'body-parser', 'path', 'express-validator'],
-function (express,   nconf,   cookieParser,    expressSession,    bodyParser,    path, expressValidator) {
-  var app  = express();
+var express = rapp('express'),
+  nconf = rapp('nconf'),
+  cookieParser = rapp('cookie-parser'),
+  expressSession = rapp('express-session'),
+  bodyParser = rapp('body-parser'),
+  path = rapp('path'),
+  expressValidator = rapp('express-validator');
 
 
-  app.set('port', nconf.get('port'));
-  app.set('view engine', 'jade');
-  app.set('views', path.join(APP_PATH, 'views'));
+var app  = express();
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded());
-  app.use(expressValidator());
-  app.use(cookieParser());
 
-  return app;
-});
+app.set('port', nconf.get('port'));
+app.set('view engine', 'jade');
+app.set('views', path.join(APP_ROOT, 'views'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
+app.use(expressValidator());
+app.use(cookieParser());
+app.use(express.static(ROOT + '/public'));
+
+module.exports = app;
