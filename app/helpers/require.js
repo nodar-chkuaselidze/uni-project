@@ -19,10 +19,10 @@ Require.prototype.require = function (modulePath) {
   dbg('trying to get file: ' +  file);
 
   try {
-    return require(path.join(this.root, modulePath));
+    return require(file);
   } catch(e) {
-    if (e.code === 'MODULE_NOT_FOUND') {
-      dbg('not found, try to find module');
+    if (e.code === 'MODULE_NOT_FOUND' && e.message.match(/^Cannot find module '(.*)'$/i)[1] === file) {
+      dbg(file + ' not found, try to find module');
       return require(modulePath);
     }
 
