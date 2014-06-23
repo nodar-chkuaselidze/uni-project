@@ -1,18 +1,13 @@
 'use strict';
 
 var express = rapp('express'),
-  nconf = rapp('nconf'),
   cookieParser = rapp('cookie-parser'),
   expressSession = rapp('express-session'),
   bodyParser = rapp('body-parser'),
   path = rapp('path'),
-  expressValidator = rapp('express-validator');
+  expressValidator = rapp('express-validator'),
+  app  = express();
 
-
-var app  = express();
-
-
-app.set('port', nconf.get('port'));
 app.set('view engine', 'jade');
 app.set('views', path.join(APP_ROOT, 'views'));
 
@@ -22,4 +17,4 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(ROOT + '/public'));
 
-module.exports = app;
+module.exports = { app : app, express : express };

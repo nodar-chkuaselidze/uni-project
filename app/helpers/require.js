@@ -52,7 +52,7 @@ function changeStack(e) {
       matchName = noBrackets[1];
     }
 
-    if (matchName !== '' && skips.indexOf(matchName) > -1) {
+    if (skips.indexOf(matchName) > -1 || matchName.match(/\/node_modules\//i)) {
     } else {
       stack.push(msg);
     }

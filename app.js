@@ -8,14 +8,15 @@ global.ROOT     = __dirname;
 global.APP_ROOT = __dirname + '/app';
 global.ENV      = env ? env : 'production';
 
-nconf.file(ROOT + '/config.json');
-
-if (ENV === 'development') {
-  nconf.file(ROOT + '/local.json');
-}
+nconf.file(ROOT + '/configs/' + (env === 'production' ? 'config' : 'local') + '.json');
 
 global.rapp = require('./app/helpers/require.js')('app', true);
 
-var index  = rapp('index'),
-    router = rapp('router');
+var index = rapp('index'),
+    app   = rapp('router');
 
+
+app.listen(nconf.get('port'), function () {
+  console.log(arguments);
+});
+module.exports = app;

@@ -15,13 +15,12 @@ gulp.task('sass-watch', function () {
 });
 
 gulp.task('nodemon', function () {
+  var exitTimeout;
+
   nodemon({
       script: 'app.js',
       ext: 'js',
       env : { 'NODE_ENV' : 'development' }
-  }).on('exit', function () {
-      console.log('Application exited');
-      process.exit();
   });
 });
 
