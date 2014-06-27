@@ -1,12 +1,13 @@
 'use strict';
 
 var express = rapp('lib/express').express,
-  router = express.Router();
-
+  router = express.Router(),
+  middlewares = rapp('lib/middlewares');
 
 router.get('/', function (req, res) {
-  console.log('Got index page');
-  res.render('index');
+  res.render('index', {
+    pageTitle : 'Nothing interesting'
+  });
 });
 
 module.exports = router;
