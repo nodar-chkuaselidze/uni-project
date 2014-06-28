@@ -1,6 +1,7 @@
 'use strict';
 
-require('./configs/bootstrap.js')(__dirname);
+global.ROOT = __dirname;
+require('./app/index');
 
 var repl = require('repl'), replServer;
 
