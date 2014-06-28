@@ -20,7 +20,8 @@
     "passport": "^0.2.0",
     "q": "^1.0.1",
     "q-io": "^1.11.2",
-    "requirejs": "^2.1.14"
+    "requirejs": "^2.1.14",
+    "validator": "^3.16.0"
   },
   "devDependencies": {
     "gulp": "^3.8.1",
