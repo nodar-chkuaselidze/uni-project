@@ -1,6 +1,8 @@
 'use strict';
 
-require('./configs/bootstrap.js')(__dirname);
+global.ROOT = __dirname;
+
+require('./app/index');
 
 var app = rapp('router'),
     nconf = require('nconf');
