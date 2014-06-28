@@ -1,3 +1,3 @@
 'use strict';
 
-var middlewares = {};
+var User = rapp('models/user');
