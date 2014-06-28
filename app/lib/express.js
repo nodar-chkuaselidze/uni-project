@@ -1,11 +1,11 @@
 'use strict';
 
-var express = rapp('express'),
-  cookieParser = rapp('cookie-parser'),
-  expressSession = rapp('express-session'),
-  bodyParser = rapp('body-parser'),
-  path = rapp('path'),
-  expressValidator = rapp('express-validator'),
+var express = require('express'),
+  cookieParser = require('cookie-parser'),
+  expressSession = require('express-session'),
+  bodyParser = require('body-parser'),
+  path = require('path'),
+  expressValidator = require('express-validator'),
   app  = express();
 
 app.set('view engine', 'jade');

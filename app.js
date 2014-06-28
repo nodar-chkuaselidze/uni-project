@@ -2,9 +2,9 @@
 
 global.rapp = require('./app/helpers/require.js')('app', true);
 
-var nconf = rapp('nconf').argv().env(),
+var nconf = require('nconf').argv().env(),
     env   = nconf.get('NODE_ENV'),
-    dbg   = rapp('debug')('app');
+    dbg   = require('debug')('app');
 
 //keep globals to minimum
 global.ROOT     = __dirname;
