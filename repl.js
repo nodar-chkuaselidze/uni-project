@@ -10,8 +10,13 @@ global.Controllers = load('controllers');
 global.Routes      = load('routes');
 global.Libs        = load('lib');
 
+process.stdin.setRawMode();
+
 replServer = repl.start({
     prompt : 'quiz-engine> ',
+    terminal : true,
+    input : process.stdin,
+    output : process.stdout,
     useGlobal : true
 });
 

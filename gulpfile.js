@@ -4,7 +4,9 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     plumber = require('gulp-plumber'),
     nodemon = require('gulp-nodemon'),
-    watch = require('gulp-watch');
+    supervisor = require('gulp-supervisor'),
+    watch = require('gulp-watch'),
+    paths;
 
 gulp.task('sass-watch', function () {
   gulp.src('./public/scss/**', { read: false })
@@ -22,13 +24,25 @@ gulp.task('nodemon', function () {
   });
 });
 
-gulp.task('console', function () {
-  nodemon({
-        script: 'repl.js',
-        ext: 'js',
-        env : { 'NODE_ENV' : 'development' }
-  })
+gulp.task('watch', function () {
+  gulp.watch('app/**/*.js', [ 'console' ]);
 });
+
+gulp.task('console', function() {
+    supervisor( 'repl.js', {
+        args: [],
+        watch: [ 'app' ],
+        pollInterval: 500,
+        extensions: [ 'js' ],
+        exec: 'node',
+        debug: true,
+        debugBrk: false,
+        harmony: false,
+        noRestartOn: 'exit',
+        forceWatch: true,
+        quiet: true
+    } );
+} );
 
 gulp.task('default', ['sass-watch', 'nodemon'], function() {
 });
