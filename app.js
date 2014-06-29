@@ -1,7 +1,6 @@
 'use strict';
 
 global.ROOT = __dirname;
-
 require('./app/index');
 
 var app = rapp('router'),
