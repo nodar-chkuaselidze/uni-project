@@ -27,7 +27,7 @@ UserSchema = new mongoose.Schema({
   roles : {
     type     : Array,
     required : true,
-    select   : false,
+    select   : true,
     default  : [ 'authenticated' ]
   },
   hashedPassword : {
@@ -47,6 +47,10 @@ UserSchema.virtual('password').set(function (password) {
     self.hashedPassword = hashedPassword;
   });
 });
+
+UserSchema.methods.hasRole = function (role) {
+  return this.roles.indexOf(role) > -1;
+};
 
 UserSchema.statics.hashPassword = function (password) {
   var deferred = Q.defer();
