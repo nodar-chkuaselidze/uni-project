@@ -6,14 +6,8 @@ global.rapp     = require(APP_ROOT + '/helpers/require.js')(APP_ROOT, true);
 
 var nconf = require('nconf').argv().env(),
     env   = nconf.get('NODE_ENV'),
-    dbg   = require('debug')('app'),
-    envs  = {
-      'production'  : 'config',
-      'development' : 'local'
-    }, configFile;
+    dbg   = require('debug')('app');
 
-global.ENV = env && envs[env] ? env : 'production';
+global.ENV = env || 'production';
 
-configFile = ROOT + '/configs/' + envs[env] + '.json';
-
-nconf.file(configFile);
+nconf.file(ROOT + '/configs/local.json');
