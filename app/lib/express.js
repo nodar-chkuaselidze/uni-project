@@ -4,6 +4,7 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   expressSession = require('express-session'),
   bodyParser = require('body-parser'),
+  flash = require('express-flash'),
   path = require('path'),
   expressValidator = require('express-validator'),
   passport = rapp('lib/passport'),
@@ -16,9 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(expressValidator());
 app.use(cookieParser());
+app.use(flash());
 app.use(expressSession({ secret : 'Some dummy text, still has to be in configs'}));
 app.use(express.static(ROOT + '/public'));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 module.exports = { app : app, express : express };
