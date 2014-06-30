@@ -17,7 +17,7 @@ exports.user  = {
     } else {
       next();
     }
-  }
+  },
   isAdmin : function (req, res, next) {
     req.isAdmin = req.isAuthenticated() && req.user.hasRole('admin');
 
