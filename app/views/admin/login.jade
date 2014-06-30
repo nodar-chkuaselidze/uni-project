@@ -3,11 +3,10 @@ extends layout.jade
 block content
   .container
     form.form-signin(role='form')
-      h2.form-signin-heading Please sign in
-      input.form-control(type='email', required='', placeholder='Email address')
-      input.form-control(type='password', required='', placeholder='Password')
-      label.checkbox
-        input(type='checkbox', value='remember-me')
-        | Remember me
-      button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+      h2.form-signin-heading ლექტორის პანელში ავტორიზაცია
+      input.form-control(type='email', required='', placeholder='E-mail მისამართი')
+      input.form-control(type='firstname', required='', placeholder='სახელი')
+      input.form-control(type='lastname', required='', placeholder='გვარი')
+      input.form-control(type='password', required='', placeholder='პაროლი')
+      button.btn.btn-lg.btn-primary.btn-block(type='submit') ავტორიზაცია
     
