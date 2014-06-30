@@ -8,8 +8,12 @@ var express = rapp('lib/express').express,
 
 router.route('/')
   .all()
-  .get( middlewares.admin.isAdmin, function (req, res) {
-    if (!req.isAdmin) {
+  .get(middlewares.user.isLecturer, function (req, res) {
+    if (req.isAuthenticated() && req.isLecturer === false) {
+      req.flash('error', 'თქვენ არ გაქვთ ლექტორის უფლებები');
+    }
+
+    if (req.isLecturer === false) {
       res.render('admin/login');
       return;
     }
@@ -18,9 +22,6 @@ router.route('/')
       pageTitle : 'It should get interesting'
     });
   })
-  .post( passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), function (req, res) {
-    console.log('authenticate success');
-    res.redirect('/?hello');
-  });
+  .post(passport.authenticate('local', { successRedirect : '/admin/', failureRedirect: '/admin/', failureFlash: true }));
 
 module.exports = router;
