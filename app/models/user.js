@@ -34,11 +34,6 @@ UserSchema = new mongoose.Schema({
     type     : String,
     required : true,
     select   : false
-  },
-  salt : {
-    type     : String,
-    required : true,
-    select   : false
   }
 });
 
