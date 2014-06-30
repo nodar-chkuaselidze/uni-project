@@ -8,24 +8,20 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     paths;
 
-gulp.task('sass-watch', function () {
-  gulp.src('./public/scss/**', { read: false })
-      .pipe(watch())
-      .pipe(plumber()) // This will keeps pipes working after error event
-      .pipe(sass())
+gulp.task('sass', function () {
+  gulp.src('./public/scss/**/*.scss')
+      .pipe(sass({
+        errLogToConsole : true
+      }))
       .pipe(gulp.dest('./public/css/'));
 });
-
+  
 gulp.task('nodemon', function () {
   nodemon({
       script: 'app.js',
-      ext: 'js',
+      ext: 'js scss',
       env : { 'NODE_ENV' : 'development' }
-  });
-});
-
-gulp.task('watch', function () {
-  gulp.watch('app/**/*.js', [ 'console' ]);
+  }).on('restart', [ 'sass']);
 });
 
 gulp.task('console', function() {
@@ -44,5 +40,5 @@ gulp.task('console', function() {
     } );
 } );
 
-gulp.task('default', ['sass-watch', 'nodemon'], function() {
+gulp.task('default', ['sass', 'nodemon'], function() {
 });
