@@ -1,8 +1,11 @@
 'use strict';
 
 var
-validator = rapp('lib/validator'),
-mongoose = rapp('lib/mongoose'),
+  validator = rapp('lib/validator'),
+  mongoose = rapp('lib/mongoose'),
+  bcrypt = require('bcryptjs'),
+  nconf = require('nconf'),
+  Q = require('q'),
 
 UserSchema = new mongoose.Schema({
   email : {
@@ -44,10 +47,30 @@ UserSchema.virtual('fullname').get(function () {
 });
 
 UserSchema.virtual('password').set(function (password) {
-  this.hashedPassword = this.hashPassword(password);
+  var self = this;
+  UserSchema.statics.hashPassword(password).then(function (hashedPassword) {
+    self.hashedPassword = hashedPassword;
+  });
 });
 
 UserSchema.statics.hashPassword = function (password) {
+  var deferred = Q.defer();
+
+  bcrypt.genSalt(10, function (err, salt) {
+    if (err) {
+      return deferred.reject(new Error(err));
+    }
+
+    bcrypt.hash(password, salt, function (err, hash) {
+      if (err) {
+        return deferred.reject(new Error(err));
+      }
+
+      deferred.resolve(hash);
+    });
+  });
+
+  return deferred.promise;
 };
 
 exports = module.exports = mongoose.model('User', UserSchema);
