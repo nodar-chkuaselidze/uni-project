@@ -2,11 +2,16 @@ extends layout.jade
 
 block content
   .container
-    form.form-signin(role='form')
+    form.form-signin(role='form',method='POST')
       h2.form-signin-heading ლექტორის პანელში ავტორიზაცია
-      input.form-control(type='email', required='', placeholder='E-mail მისამართი')
-      input.form-control(type='firstname', required='', placeholder='სახელი')
-      input.form-control(type='lastname', required='', placeholder='გვარი')
-      input.form-control(type='password', required='', placeholder='პაროლი')
+
+      - if (messages.error)
+        .alert.alert-danger(role="alert")
+          button.close(data-dismiss="alert",type="button") X
+          | #{messages.error}
+
+      input.form-control(type='email',    name='email',     required='', placeholder='E-mail მისამართი')
+      input.form-control(type='text',     name='firstname', required='', placeholder='სახელი')
+      input.form-control(type='text',     name='lastname',  required='', placeholder='გვარი')
+      input.form-control(type='password', name='password',  required='', placeholder='პაროლი')
       button.btn.btn-lg.btn-primary.btn-block(type='submit') ავტორიზაცია
-    
