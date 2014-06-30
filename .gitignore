@@ -15,3 +15,4 @@ node_modules
 
 configs/local.json
 public/vendor/
+public/css/
