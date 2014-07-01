@@ -29,9 +29,15 @@ router.route('/')
     failureFlash: true
   }));
 
+router.get('/tests', middlewares.user.checkLecturer, function (req, res) {
+});
+
+router.get('/createUser', middlewares.user.checkAdmin, function (req, res) {
+});
+
 router.get('/logout', middlewares.user.checkLecturer, function (req, res) {
   req.logOut();
-  req.redirect('/lecturer/');
+  res.redirect('/lecturer/');
 });
 
 module.exports = router;
