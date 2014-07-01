@@ -19,8 +19,7 @@ router.route('/')
     }
 
     res.render('admin/index', {
-      pageTitle : 'მთავარი პანელი',
-      user : req.user
+      pageTitle : 'მთავარი პანელი'
     });
   })
   .post(passport.authenticate('local', {
