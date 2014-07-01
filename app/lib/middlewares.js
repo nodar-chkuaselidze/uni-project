@@ -3,7 +3,7 @@
 var User = rapp('models/user');
 
 exports.user  = {
-  reqAdmin : function (req, res, next) {
+  checkAdmin : function (req, res, next) {
     if (req.isAuthenticated() && !req.user.hasRole('admin')) {
       req.flash('error', 'თქვენ არ გაქვთ ადმინისტრატორის უფლებები');
       res.redirect('/lecturer/');
