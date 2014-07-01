@@ -31,7 +31,7 @@ router.route('/')
 
 router.get('/logout', middlewares.user.checkLecturer, function (req, res) {
   req.logOut();
-  res.redirect('/lecturer');
+  req.redirect('/lecturer/');
 });
 
 module.exports = router;
