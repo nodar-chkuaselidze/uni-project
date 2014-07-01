@@ -20,8 +20,11 @@ app.use(cookieParser());
 app.use(flash());
 app.use(expressSession({ secret : 'Some dummy text, still has to be in configs'}));
 app.use(express.static(ROOT + '/public'));
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+if (require('nconf').get('NODE_ENV') === 'development') {
+  app.locals.pretty = true;
+}
 
 module.exports = { app : app, express : express };
