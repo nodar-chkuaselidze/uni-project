@@ -23,6 +23,14 @@ app.use(express.static(ROOT + '/public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function (req, res, next) {
+  if (req.user) {
+    res.locals.user = req.user;
+  }
+
+  next();
+});
+
 if (require('nconf').get('NODE_ENV') === 'development') {
   app.locals.pretty = true;
 }
