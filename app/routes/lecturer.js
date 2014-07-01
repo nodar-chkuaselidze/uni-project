@@ -31,7 +31,10 @@ router.route('/')
 router.get('/tests', middlewares.user.checkLecturer, function (req, res) {
 });
 
-router.get('/createUser', middlewares.user.checkAdmin, function (req, res) {
+router.get('/password-change', middlewares.user.checkLecturer, function (req, res) {
+  res.render('admin/change-password', {
+    pageTitle : 'შეცვალეთ პაროლი'
+  });
 });
 
 router.get('/logout', middlewares.user.checkLecturer, function (req, res) {
