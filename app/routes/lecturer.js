@@ -18,10 +18,20 @@ router.route('/')
       return;
     }
 
-    res.render('index', {
-      pageTitle : 'It should get interesting'
+    res.render('admin/index', {
+      pageTitle : 'მთავარი პანელი',
+      user : req.user
     });
   })
-  .post(passport.authenticate('local', { successRedirect : '/lecturer/', failureRedirect: '/lecturer/', failureFlash: true }));
+  .post(passport.authenticate('local', {
+    successRedirect : '/lecturer/',
+    failureRedirect: '/lecturer/',
+    failureFlash: true
+  }));
+
+router.get('/logout', middlewares.user.checkLecturer, function (req, res) {
+  req.logOut();
+  res.redirect('/lecturer');
+});
 
 module.exports = router;
