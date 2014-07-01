@@ -22,6 +22,6 @@ router.route('/')
       pageTitle : 'It should get interesting'
     });
   })
-  .post(passport.authenticate('local', { successRedirect : '/admin/', failureRedirect: '/admin/', failureFlash: true }));
+  .post(passport.authenticate('local', { successRedirect : '/lecturer/', failureRedirect: '/lecturer/', failureFlash: true }));
 
 module.exports = router;
