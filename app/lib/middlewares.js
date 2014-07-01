@@ -4,14 +4,14 @@ var User = rapp('models/user');
 
 exports.user  = {
   checkAdmin : function (req, res, next) {
-    if (req.isAuthenticated() && !req.user.hasRole('admin')) {
+    if (!req.isAuthenticated() || !req.user.hasRole('admin')) {
       req.flash('error', 'თქვენ არ გაქვთ ადმინისტრატორის უფლებები');
       res.redirect('/lecturer/');
     }
   },
 
   checkLecturer : function (req, res, next) {
-    if (req.isAuthenticated() && !req.user.hasRole('lecturer')) {
+    if (!req.isAuthenticated() || !req.user.hasRole('lecturer')) {
       req.flash('error', 'თქვენ არ გაქვთ ლექტორის უფლებები');
       res.redirect('/');
     } else {
