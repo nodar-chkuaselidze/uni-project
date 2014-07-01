@@ -1,6 +1,16 @@
 .navbar.navbar-top(role="navigation")
   .container-fluid
-    p.navbar-text.navbar-right
-      | შემოსული ხართ როგორც <b>#{user.fullname}</b>,
-      a.navbar-link(href="/lecturer/logout") სისტემიდან გასვლა
+    .navbar-collapse.collapse.navbar-right
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle#dropdownParams(type="button", data-toggle="dropdown", href="#")
+            | პარამეტრები
+            span.caret
+          ul.dropdown-menu(role="menu", aria-labelledby="dropdownParams")
+            li(role="presentation")
+              a(role="menuitem",tabindex="-1",href="#") პაროლის შეცვლა
+        li
+          a(href="/lecturer/logout") სისტემიდან გასვლა
+    p.navbar-text.navbar-left
+      | შემოსული ხართ როგორც <b>#{user.fullname}</b>
 
