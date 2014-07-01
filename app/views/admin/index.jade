@@ -1,13 +1,5 @@
-extends layout.jade
+extends logged-layout.jade
 
-block content
-  include header
-
-  .container-fluid
-    .row
-      include side-menu
-      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-        p
-          | Hellp
-
-  include footer
+block main
+  p
+    | Hellp

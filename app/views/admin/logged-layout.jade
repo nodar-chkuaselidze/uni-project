@@ -1,0 +1,15 @@
+extends layout.jade
+
+block content
+  include header
+
+  .container-fluid
+    .row
+      include side-menu
+      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+        block main
+
+  include footer
+
+block scripts
+  script(src="/js/admin.js")
