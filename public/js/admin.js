@@ -8,7 +8,8 @@
     oldPassword = $("#oldPassword"),
     newPassword = $("#newPassword"),
     repeatNewPassword = $("#repeatNewPassword"),
-    alertBox = $(".alert[name='change-password']");
+    alertBox = $(".alert[name='change-password']"),
+    alertText = alertBox.find('.alert-text');
 
   var checkNewPassword = function (e) {
     if (newPassword.val() != repeatNewPassword.val()) {
@@ -31,10 +32,10 @@
       },
       type : 'POST',
       dataType : 'json'
-    }).success(function (ajaxEvent) {
-      alertBox.addClass('alert-success').removeClass('alert-danger');
+    }).success(function (data) {
+      alertBox.removeClass('hide').addClass('alert-success').removeClass('alert-danger');
 
-      console.log(ajaxEvent);
+      alertText.html(data.message);
     }).fail(function (ajaxEvent) {
       var data = ajaxEvent.responseJSON;
       var doc  = $('<ul></ul>');
@@ -44,7 +45,7 @@
       alertBox.removeClass('hide').removeClass('alert-success').addClass('alert-danger');
 
       if (ajaxEvent.status != 400 || !data instanceof Array) {
-        alertBox.find('.alert-text').html(defaultError);
+        alertText.html(defaultError);
         return;
       }
 
@@ -61,7 +62,7 @@
         doc.append('<li>' + error + '</li>');
       }
 
-      alertBox.find('.alert-text').html(doc);
+      alertText.html(doc);
     });
     return false;
   });
