@@ -2,13 +2,13 @@
 
 var express = rapp('lib/express').express,
   router = express.Router(),
-  middlewares = rapp('lib/middlewares'),
+  userMiddlewares = rapp('routes/middlewares/user'),
   passport = rapp('lib/passport');
 
 
 router.route('/')
   .all()
-  .get(middlewares.user.isLecturer, function (req, res) {
+  .get(userMiddlewares.isLecturer, function (req, res) {
     if (req.isAuthenticated() && req.isLecturer === false) {
       req.flash('error', 'თქვენ არ გაქვთ ლექტორის უფლებები');
     }
@@ -28,16 +28,16 @@ router.route('/')
     failureFlash: true
   }));
 
-router.get('/tests', middlewares.user.checkLecturer, function (req, res) {
+router.get('/tests', userMiddlewares.checkLecturer, function (req, res) {
 });
 
-router.get('/password-change', middlewares.user.checkLecturer, function (req, res) {
+router.get('/password-change', userMiddlewares.checkLecturer, function (req, res) {
   res.render('admin/change-password', {
     pageTitle : 'შეცვალეთ პაროლი'
   });
 });
 
-router.get('/logout', middlewares.user.checkLecturer, function (req, res) {
+router.get('/logout', userMiddlewares.checkLecturer, function (req, res) {
   req.logOut();
   res.redirect('/lecturer/');
 });
