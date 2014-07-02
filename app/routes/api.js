@@ -8,8 +8,8 @@ var express = rapp('lib/express').express,
 
 router.post('/change-password', apiMiddlewares.ensureAuth, function (req, res) {
   apiControllers.changePassword(req)
-  .then(function () {
-    res.json(404, {});
+  .then(function (text) {
+    res.json(200, { message : text });
   })
   .catch(function (error) {
     if (!error.status || !error.list) {
