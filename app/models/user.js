@@ -40,12 +40,12 @@ UserSchema.virtual('fullname').get(function () {
   return this.firstName + ' ' + this.lastName;
 });
 
-UserSchema.virtual('password').set(function (password) {
+UserSchema.methods.setPassword = function (password) {
   var self = this;
-  UserSchema.statics.hashPasswordQ(password).then(function (hashedPassword) {
+  return UserSchema.statics.hashPasswordQ(password).then(function (hashedPassword) {
     self.hashedPassword = hashedPassword;
   });
-});
+};
 
 UserSchema.methods.hasRole = function (role) {
   return this.roles.indexOf(role) > -1;
