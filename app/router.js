@@ -5,5 +5,6 @@ var app = rapp('lib/express').app,
 
 app.use('/',         rapp('routes/index'));
 app.use('/lecturer', rapp('routes/lecturer'));
+app.use('/api/v1/',  rapp('routes/api'));
 
 module.exports = app;
