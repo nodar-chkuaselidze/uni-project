@@ -16,7 +16,11 @@ apiControllers.changePassword = function (req) {
 
       return req.user.isPasswordQ(req.body.oldPassword);
     }).then(function () {
-      console.log('somewhere here');
+      return req.user.setPassword(req.body.newPassword);
+    }).then(function () {
+      return req.user.saveQ();
+    }).then(function () {
+      return 'პაროლი შეიცვალა';
     }).catch(function (errors) {
       debug('We found error');
 
@@ -25,6 +29,11 @@ apiControllers.changePassword = function (req) {
           errors = errors.message;
         case typeof errors === "string":
           errors = [ errors ];
+          break;
+        case errors instanceof Array:
+          break;
+        default:
+          errors = [ 'პაროლის შეცვლა არ მოხერხდა' ];
       }
 
       return Q.reject({
