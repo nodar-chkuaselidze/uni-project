@@ -5,6 +5,7 @@ var
   mongoose = rapp('lib/mongoose'),
   bcrypt = require('bcryptjs'),
   nconf = require('nconf'),
+  debug = require('debug')('app:models:user'),
   Q = require('q'),
 
 UserSchema = new mongoose.Schema({
@@ -27,13 +28,11 @@ UserSchema = new mongoose.Schema({
   roles : {
     type     : Array,
     required : true,
-    select   : true,
     default  : [ 'authenticated' ]
   },
   hashedPassword : {
     type     : String,
-    required : true,
-    select   : false
+    required : true
   }
 });
 
@@ -43,7 +42,7 @@ UserSchema.virtual('fullname').get(function () {
 
 UserSchema.virtual('password').set(function (password) {
   var self = this;
-  UserSchema.statics.hashPassword(password).then(function (hashedPassword) {
+  UserSchema.statics.hashPasswordQ(password).then(function (hashedPassword) {
     self.hashedPassword = hashedPassword;
   });
 });
@@ -52,7 +51,7 @@ UserSchema.methods.hasRole = function (role) {
   return this.roles.indexOf(role) > -1;
 };
 
-UserSchema.statics.hashPassword = function (password) {
+UserSchema.statics.hashPasswordQ = function (password) {
   var deferred = Q.defer();
 
   bcrypt.genSalt(10, function (err, salt) {
@@ -70,6 +69,18 @@ UserSchema.statics.hashPassword = function (password) {
   });
 
   return deferred.promise;
+};
+
+UserSchema.methods.isPasswordQ = function (password) {
+  debug('check if the `password` is set');
+
+  if (bcrypt.compareSync(password, this.hashedPassword)) {
+    debug('password is correct');
+    return Q(true)
+  } else {
+    debug('password is incorrect');
+    return Q.reject(new Error('პაროლი არ არის სწორი'));
+  }
 };
 
 exports = module.exports = mongoose.model('User', UserSchema);
