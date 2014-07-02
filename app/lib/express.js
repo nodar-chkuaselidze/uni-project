@@ -8,6 +8,7 @@ var express = require('express'),
   path = require('path'),
   expressValidator = require('express-validator'),
   passport = rapp('lib/passport'),
+  nconf = require('nconf'),
   app  = express();
 
 app.set('view engine', 'jade');
@@ -23,6 +24,33 @@ app.use(express.static(ROOT + '/public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+if (nconf.get('NODE_ENV') === 'development') {
+  app.locals.pretty = true;
+
+  if (nconf.get('dev-autoAuth')) {
+    //automatically authenticate admin
+    app.use(function (req, res, next) {
+      if (req.user) {
+        next();
+        return;
+      }
+
+      var User = rapp('models/user');
+
+      User.findOneQ({ 
+        'email' : nconf.get('admin').email
+      }).then(function (user) {
+        req.logIn(user, function (err) {
+          if (err) throw err;
+          next();
+        });
+      }).fail(function (error) {
+        throw new Error(error);
+      });
+    });
+  }
+}
+
 app.use(function (req, res, next) {
   if (req.user) {
     res.locals.user = req.user;
@@ -30,9 +58,5 @@ app.use(function (req, res, next) {
 
   next();
 });
-
-if (require('nconf').get('NODE_ENV') === 'development') {
-  app.locals.pretty = true;
-}
 
 module.exports = { app : app, express : express };
