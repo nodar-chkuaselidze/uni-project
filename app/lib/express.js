@@ -40,7 +40,7 @@ if (nconf.get('NODE_ENV') === 'development') {
       var User = rapp('models/user');
 
       User.findOneQ({
-        'email' : nconf.get('admin').email
+        email : nconf.get('admin').email
       }).then(function (user) {
         req.logIn(user, function (err) {
           if (err) throw err;
@@ -57,6 +57,7 @@ app.use(function (req, res, next) {
   res.setHeader('X-Powered-By', 'TSU');
 
   expressValidator.Q(req);
+
   if (req.user) {
     res.locals.user = req.user;
   }
