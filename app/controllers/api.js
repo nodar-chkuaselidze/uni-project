@@ -14,7 +14,7 @@ apiControllers.changePassword = function (req) {
   return req.validationErrorsQ().then(function () {
       debug('Check if password is okay');
 
-      return Q(req.user.isPasswordQ(req.body.oldPassword))
+      return req.user.isPasswordQ(req.body.oldPassword);
     }).then(function () {
       console.log('somewhere here');
     }).catch(function (errors) {
