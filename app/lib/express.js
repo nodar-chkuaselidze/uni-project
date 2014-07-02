@@ -39,7 +39,7 @@ if (nconf.get('NODE_ENV') === 'development') {
 
       var User = rapp('models/user');
 
-      User.findOneQ({ 
+      User.findOneQ({
         'email' : nconf.get('admin').email
       }).then(function (user) {
         req.logIn(user, function (err) {
