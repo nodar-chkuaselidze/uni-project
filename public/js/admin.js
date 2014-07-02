@@ -32,15 +32,36 @@
       type : 'POST',
       dataType : 'json'
     }).success(function (ajaxEvent) {
-      alertBox.addClass('hide');
+      alertBox.addClass('alert-success').removeClass('alert-danger');
 
       console.log(ajaxEvent);
     }).fail(function (ajaxEvent) {
-      alertBox.removeClass('hide');
+      var data = ajaxEvent.responseJSON;
+      var doc  = $('<ul></ul>');
 
-      if (ajaxEvent.status != 400) {
-        alertBox.find('.alert-text').html('პაროლის შეცვლა არ მოხერხდა');
+      var defaultError = 'პაროლის შეცვლა არ მოხერხდა';
+
+      alertBox.removeClass('hide').removeClass('alert-success').addClass('alert-danger');
+
+      if (ajaxEvent.status != 400 || !data instanceof Array) {
+        alertBox.find('.alert-text').html(defaultError);
+        return;
       }
+
+
+      for (var i = 0; i < data.length; i++) {
+        var error = data[i];
+
+        if (typeof error === 'object' && error.msg) {
+          error = error.msg;
+        } else if(typeof error !== 'string') {
+          error = defaultError;
+        }
+
+        doc.append('<li>' + error + '</li>');
+      }
+
+      alertBox.find('.alert-text').html(doc);
     });
     return false;
   });
