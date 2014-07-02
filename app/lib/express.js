@@ -6,7 +6,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   flash = require('express-flash'),
   path = require('path'),
-  expressValidator = require('express-validator'),
+  expressValidator = rapp('lib/express-validator'),
   passport = rapp('lib/passport'),
   nconf = require('nconf'),
   app  = express();
@@ -56,6 +56,7 @@ if (nconf.get('NODE_ENV') === 'development') {
 app.use(function (req, res, next) {
   res.setHeader('X-Powered-By', 'TSU');
 
+  expressValidator.Q(req);
   if (req.user) {
     res.locals.user = req.user;
   }
