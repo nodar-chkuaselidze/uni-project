@@ -10,10 +10,7 @@ apiControllers.changePassword = function (req) {
   req.checkBody('newPassword', 'პაროლი უნდა შედგებოდეს მინიმუმ 6 სიმბოლოთი').isLength(6);
   req.checkBody('newPassword', 'განმეორებითი პაროლი არ დაემთხვა').equals(req.body.repeatNewPassword);
 
-  debug('make password validations');
   return req.validationErrorsQ().then(function () {
-      debug('Check if password is okay');
-
       return req.user.isPasswordQ(req.body.oldPassword);
     }).then(function () {
       return req.user.setPassword(req.body.newPassword);
@@ -22,8 +19,6 @@ apiControllers.changePassword = function (req) {
     }).then(function () {
       return 'პაროლი შეიცვალა';
     }).catch(function (errors) {
-      debug('We found error');
-
       switch (true) {
         case errors instanceof Error:
           errors = errors.message;
