@@ -7,12 +7,16 @@ var express = rapp('lib/express').express,
   passport = rapp('lib/passport');
 
 router.post('/change-password', apiMiddlewares.ensureAuth, function (req, res) {
-  apiControllers.changePassword(req).then(function () {
-    console.log('password should have changed');
+  apiControllers.changePassword(req)
+  .then(function () {
     res.json(404, {});
   })
   .catch(function (error) {
-    console.log('password should not have changed, we got errors');
+    if (!error.status || !error.list) {
+      res.json(404, {});
+      return;
+    }
+
     res.json(error.status, error.list);
   });
 });
