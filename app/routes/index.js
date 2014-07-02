@@ -1,8 +1,7 @@
 'use strict';
 
 var express = rapp('lib/express').express,
-  router = express.Router(),
-  middlewares = rapp('lib/middlewares');
+  router = express.Router();
 
 router.get('/', function (req, res) {
   res.render('index', {
