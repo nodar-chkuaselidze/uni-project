@@ -14,6 +14,8 @@ var express = require('express'),
 app.set('view engine', 'jade');
 app.set('views', path.join(APP_ROOT, 'views'));
 
+app.disable('x-powered-by');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(expressValidator());
@@ -52,6 +54,8 @@ if (nconf.get('NODE_ENV') === 'development') {
 }
 
 app.use(function (req, res, next) {
+  res.setHeader('X-Powered-By', 'TSU');
+
   if (req.user) {
     res.locals.user = req.user;
   }
