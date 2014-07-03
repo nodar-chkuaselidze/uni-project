@@ -29,7 +29,7 @@
 
 .navbar-text {
   font-size: 13px;
-  
+
   .navbar-link {
     margin-left: 5px;
   }
@@ -93,4 +93,21 @@
 
 .alert-text > ul {
   display: inline-block;
+}
+
+/**
+ * Tests page
+ */
+.test-list {
+  h3 {
+    text-align: center;
+  }
+
+  .table {
+    margin-top: 20px;
+  }
+
+  .table-hover > tbody > tr {
+    cursor: pointer;
+  }
 }

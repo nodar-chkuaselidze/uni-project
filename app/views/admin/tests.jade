@@ -5,7 +5,7 @@ block main
 
   .test-list
     h3 თქვენი ტესტები
-    table.table.table-striped
+    table.table.table-striped.table-hover.table-condensed
       thead
         tr
           th #
@@ -14,10 +14,11 @@ block main
           th მაქსიმალური ქულა
           th დამატების თარიღი
       tbody
-        tr
-          td 1
-          td მონაცემთა ბაზები
-          td 20
-          td 40
-          td 03.07.2014
+        each test, index in tests
+          tr
+            td #{index + 1}
+            td #{test.subject}
+            td #{test.questions.length}
+            td #{test.maxScore}
+            td #{test.createdAt}
 
