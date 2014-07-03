@@ -21,6 +21,14 @@ TestSchema = new mongoose.Schema({
   questions : {
     type : Array,
     required : true,
+  },
+  createdAt : {
+    type     : Date,
+    required : true
+  },
+  deletedAt : {
+    type     : Date,
+    required : true
   }
 });
 
