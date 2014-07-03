@@ -103,11 +103,44 @@
     text-align: center;
   }
 
+  a {
+    float: right;
+  }
+
   .table {
     margin-top: 20px;
   }
 
   .table-hover > tbody > tr {
     cursor: pointer;
+  }
+}
+
+#newTest {
+  max-width: 800px;
+  margin: auto;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+
+  h4 {
+    font-weight: bold;
+  }
+
+  .addTest {
+    margin-left: 10px;
+    border-left: 1px solid black;
+    padding-left: 5px;
+  }
+
+  .form-group {
+    margin: 15px auto;
+    max-width: 600px;
+  }
+
+  input { 
+    max-width: 400px;
   }
 }
