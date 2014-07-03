@@ -35,6 +35,10 @@ SolutionSchema = new mongoose.Schema({
   createdAt : {
     type     : Date,
     required : true
+  },
+  deletedAt : {
+    type     : Date,
+    required : true,
   }
 });
 
