@@ -117,7 +117,6 @@
 }
 
 #newTest {
-  max-width: 800px;
   margin: auto;
   background-color: #eee;
   border: 1px solid #ccc;
@@ -140,7 +139,36 @@
     max-width: 600px;
   }
 
-  input { 
+  input {
     max-width: 400px;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+.testCases {
+  .testCase {
+    background-color: #ddd;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    > .form-group input {
+      width: 100%;
+    }
+
+    .rightAnswer input {
+      text-align: center;
+    }
+
+    .answers {
+      width: 100%;
+      border-top: 1px solid black;
+      margin-top: 10px;
+      padding-top: 10px;
+
+    }
   }
 }
