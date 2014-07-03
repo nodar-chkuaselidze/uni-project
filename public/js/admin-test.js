@@ -1,5 +1,28 @@
 var addTestApp = angular.module('addTestApp', []);
 
 addTestApp.controller('addTestCtrl', function ($scope) {
-  $scope.nodo = 123;
+  var test = {
+    question : '',
+    maxScore : 0
+  };
+
+  $scope.test = test;
+  $scope.list = [];
+
+  $scope.$watch('list.length', function (newVal) {
+    test.maxScore = $scope.list.reduce(function (prev, curr) {
+      return prev + curr.rightAnswer;
+    }, 0);
+  });
+
+  $scope.addTest = function () {
+    $scope.list.push({
+      question : '',
+      answers  : [ '' ],
+      rightAnswer : 1,
+      wrongAnswer : 0
+    });
+  };
+
+  $scope.addTest();
 });
