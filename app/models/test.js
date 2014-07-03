@@ -22,6 +22,10 @@ TestSchema = new mongoose.Schema({
     type : Array,
     required : true,
   },
+  maxScore : {
+    type     : Number,
+    required : true
+  },
   createdAt : {
     type     : Date,
     required : true
