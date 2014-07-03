@@ -1,9 +1,29 @@
 extends logged-layout.jade
 
 block main
-  .new-test.hide
+  div(ng-app="addTestApp")
+    #newTest(ng-controller="addTestCtrl")
+      h4 ახალი ტესტი
+      .alert.alert-danger.alert-dismissible(name="change-password", ng-hide="true")
+        span.alert-text მოხდა შეცდომა
+        button.close(type="button", class="close", data-dismiss="alert")
+          span(aria-hidden="true") &times;
+      form.form-horizontal
+        .form-group
+          label.col-sm-3.control-label(for="testSubject") საგანი
+          .col-sm-9
+            input.form-control#testSubject(type="text", placeholder="საგანი")
+        .tests
+          .testSample
+            .form-group
+              label.col-sm-3.control-label(for="testItem{{i}}") კითხვა {{i}}
+              input.form-control(id="testItem{{i}}", placeholder="კითხვა ?")
+        .calculateLast
+          | სულ ქულა {{maxScore}}, სულ კითხვა {{questionsCount}}
+          a.addTest(href="#") + დაამატე ტესტი
 
   .test-list
+    a.btn.btn-default#addTest(href="#") დაამატეთ ტესტი
     h3 თქვენი ტესტები
     table.table.table-striped.table-hover.table-condensed
       thead
@@ -22,3 +42,6 @@ block main
             td #{test.maxScore}
             td #{test.createdAt}
 
+block scripts
+  script(src="/vendor/angular/angular.min.js",type="text/javascript")
+  script(src="/js/admin-test.js", type="text/javascript")
