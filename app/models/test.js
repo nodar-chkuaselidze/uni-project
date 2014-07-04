@@ -32,7 +32,7 @@ TestSchema = new mongoose.Schema({
   },
   deletedAt : {
     type     : Date,
-    required : true
+    required : false
   }
 });
 
