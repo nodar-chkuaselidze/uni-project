@@ -26,6 +26,9 @@ addTestApp.controller('addTestCtrl', function ($scope) {
     });
   };
 
+  $scope.removeAnswer = function (listItemIndex, answerIndex) {
+    $scope.list[listItemIndex].answers.splice(answerIndex, 1);
+  };
   $scope.saveTest = function () {
     console.log(test);
   };

@@ -29,7 +29,7 @@ block main
                     input(type="checkbox", ng-model="answer.correct")
                   input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი", required)
                   span.input-group-addon
-                    button(ng-click="removeAnswer($index)") X
+                    button(type="button", ng-click="removeAnswer($parent.$index, $index)") X
         .form-group
           | სულ ტესტი {{list.length | number}}, სულ ქულა {{test.maxScore | number}}
           a.addTest(href="#",ng-click="addTest()") + დაამატეთ კითხვა
