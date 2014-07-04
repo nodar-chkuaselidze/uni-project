@@ -2,23 +2,23 @@ extends logged-layout.jade
 
 block main
   div(ng-app="addTestApp")
-    #newTest(ng-controller="addTestCtrl")
+    form#newTest(ng-controller="addTestCtrl", novalidation)
       h4 {{test.name ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
           label.col-sm-3.control-label(for="testSubject") საგანი
           .col-sm-9
-            input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.subject")
+            input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.subject", required)
         .testCases
           .testCase.form-inline(ng-repeat="case in list")
             .form-group.col-sm-8.question
               label.col-sm-4.control-label შეკითხვა \#{{$index + 1}}:
               .col-sm-8
-                input.form-control(ng-model="case.question", placeholder="შეკითხვა")
+                input.form-control(ng-model="case.question", placeholder="შეკითხვა", required)
             .form-group.col-sm-4.rightAnswer
               label.col-sm-6.control-label შეფასება:
               .col-sm-6
-                input.form-control(ng-model="case.rightAnswer")
+                input.form-control(type="number", ng-model="case.rightAnswer", required, number, min="1")
             .clear
 
             .answers
@@ -27,7 +27,9 @@ block main
                 .input-group(ng-class="answer.correct ? 'has-success' : ''")
                   span.input-group-addon
                     input(type="checkbox", ng-model="answer.correct")
-                  input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი")
+                  input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი", required)
+                  span.input-group-addon
+                    button(ng-click="removeAnswer($index)") X
         .form-group
           | სულ ტესტი {{list.length | number}}, სულ ქულა {{test.maxScore | number}}
           a.addTest(href="#",ng-click="addTest()") + დაამატეთ კითხვა
