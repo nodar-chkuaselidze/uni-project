@@ -19,8 +19,19 @@ router.route('/')
       return;
     }
 
-    res.render('admin/index', {
-      pageTitle : 'მთავარი პანელი'
+    userControllers
+    .getUserTests(req)
+    .then(function (tests) {
+      if (tests === null) {
+        tests = [];
+      }
+
+      res.render('admin/tests', {
+        pageTitle : 'ტესტები',
+        tests     : tests
+      });
+    }).catch(function (error) {
+      res.end(500);
     });
   })
   .post(passport.authenticate('local', {
@@ -28,24 +39,6 @@ router.route('/')
     failureRedirect: '/lecturer/',
     failureFlash: true
   }));
-
-router.get('/tests', userMiddlewares.checkLecturer, function (req, res) {
-  userControllers
-  .getUserTests(req)
-  .then(function (tests) {
-    if (tests === null) {
-      tests = [];
-    }
-
-    console.log(tests);
-    res.render('admin/tests', {
-      pageTitle : 'ტესტები',
-      tests     : tests
-    });
-  }).catch(function (error) {
-    res.end(500);
-  });
-});
 
 router.get('/password-change', userMiddlewares.checkLecturer, function (req, res) {
   res.render('admin/change-password', {
