@@ -139,7 +139,7 @@
     max-width: 600px;
   }
 
-  input {
+  > input {
     max-width: 400px;
   }
 }
@@ -154,6 +154,7 @@
     border-radius: 15px;
     padding: 10px;
     margin-bottom: 20px;
+    position: relative;
 
     > .form-group input {
       width: 100%;
@@ -168,7 +169,22 @@
       border-top: 1px solid black;
       margin-top: 10px;
       padding-top: 10px;
+      position: relative;
 
+      .addAnswer {
+        position: absolute;
+        right: 10px;
+        top: -20px;
+      }
+
+      .input-group {
+        margin: auto;
+        width: 90%;
+
+        .input-group-addon {
+          width: 1%;
+        }
+      }
     }
   }
 }

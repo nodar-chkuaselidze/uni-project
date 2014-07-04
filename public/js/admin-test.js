@@ -9,16 +9,16 @@ addTestApp.controller('addTestCtrl', function ($scope) {
   $scope.test = test;
   $scope.list = [];
 
-  $scope.$watch('list.length', function (newVal) {
+  $scope.$watch('list', function (newVal) {
     test.maxScore = $scope.list.reduce(function (prev, curr) {
-      return prev + curr.rightAnswer;
+      return prev + +curr.rightAnswer;
     }, 0);
-  });
+  }, true);
 
   $scope.addTest = function () {
     $scope.list.push({
       question : '',
-      answers  : [ '' ],
+      answers  : [ { correct : false,  text : '' } ],
       rightAnswer : 1,
       wrongAnswer : 0
     });

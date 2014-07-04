@@ -21,12 +21,13 @@ block main
                 input.form-control(ng-model="case.rightAnswer")
             .clear
 
-            form.form-inline.answers
-              .form-group(ng-repeat="answer in case.answers")
-                .radio
-                  .radio-inline.control-label
-                    input.form-control(type="radio", ng-model="answer.correct")
-                    input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი")
+            .answers
+              a.addAnswer(href="#", ng-click="case.answers.push({ text : '', correct : false })") დაამატე სავარაუდო პასუხი
+              .row(ng-repeat="answer in case.answers")
+                .input-group(ng-class="answer.correct ? 'has-success' : ''")
+                  span.input-group-addon
+                    input(type="checkbox", ng-model="answer.correct")
+                  input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი")
         .form-group
           | სულ ტესტი {{list.length | number}}, სულ ქულა {{test.maxScore | number}}
           a.addTest(href="#",ng-click="addTest()") + დაამატეთ ტესტი
