@@ -3,7 +3,7 @@ extends logged-layout.jade
 block main
   div(ng-app="addTestApp")
     form#newTest(ng-controller="addTestCtrl", novalidation)
-      h4 {{test.name ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
+      h4 {{test.subject ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
           label.col-sm-3.control-label(for="testSubject") საგანი
