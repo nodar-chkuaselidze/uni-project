@@ -2,6 +2,7 @@
 
 var apiControllers = {},
     debug = require('debug')('app:controllers:api'),
+    Test = rapp('models/test'),
     _ = require('lodash'),
     Q = require('q');
 
@@ -39,6 +40,26 @@ apiControllers.changePassword = function (req) {
 };
 
 apiControllers.addTests = function (req) {
+  var testData = req.body,
+      test;
+
+  test = new Test();
+
+  test.owner     = req.user.email;
+  test.subject   = testData.subject;
+  test.maxScore  = testData.maxScore;
+  test.questions = testData.list;
+  test.createdAt = Date.now();
+  test.deletedAt = null;
+
+  return test.saveQ().then(function () {
+    return 'ტესტი შენახულია';
+  }).catch(function (errors) {
+    return Q.reject({
+      status : 400,
+      list   : errors
+    });
+  });
 };
 
 exports = module.exports = apiControllers;
