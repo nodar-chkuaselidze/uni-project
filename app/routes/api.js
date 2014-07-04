@@ -22,9 +22,16 @@ router.post('/change-password', apiMiddlewares.ensureAuth, function (req, res) {
 });
 
 router.post('/add-test', apiMiddlewares.checkLecturer, function (req, res) {
-  apiControllers.addTests(req);
+  apiControllers.addTests(req).then(function (text) {
+    res.json(200, { message : text });
+  }).catch(function (error) {
+    if (!error.status || !error.list) {
+      res.json(404, {});
+      return;
+    }
 
-  res.json(404, {});
+    res.json(error.status, error.list);
+  });
 });
 
 
