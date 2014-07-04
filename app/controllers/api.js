@@ -38,4 +38,7 @@ apiControllers.changePassword = function (req) {
     });
 };
 
+apiControllers.addTests = function (req) {
+};
+
 exports = module.exports = apiControllers;

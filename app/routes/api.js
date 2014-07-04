@@ -21,5 +21,11 @@ router.post('/change-password', apiMiddlewares.ensureAuth, function (req, res) {
   });
 });
 
+router.post('/add-test', apiMiddlewares.checkLecturer, function (req, res) {
+  apiControllers.addTests(req);
+
+  res.json(404, {});
+});
+
 
 exports = module.exports = router;
