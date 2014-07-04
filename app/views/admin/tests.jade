@@ -3,12 +3,12 @@ extends logged-layout.jade
 block main
   div(ng-app="addTestApp")
     #newTest(ng-controller="addTestCtrl")
-      h4 {{test.name ? '' : 'ახალი' }} ტესტი {{test.name ? '"' + test.name + '"' : ''}}
+      h4 {{test.name ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
           label.col-sm-3.control-label(for="testSubject") საგანი
           .col-sm-9
-            input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.name")
+            input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.subject")
         .testCases
           .testCase.form-inline(ng-repeat="case in list")
             .form-group.col-sm-8.question
@@ -30,7 +30,10 @@ block main
                   input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი")
         .form-group
           | სულ ტესტი {{list.length | number}}, სულ ქულა {{test.maxScore | number}}
-          a.addTest(href="#",ng-click="addTest()") + დაამატეთ ტესტი
+          a.addTest(href="#",ng-click="addTest()") + დაამატეთ კითხვა
+          br
+          br
+          button.btn.btn-default(ng-click="saveTest()") შეინახეთ ტესტი
 
   .test-list
     a.btn.btn-default#addTest(href="#") დაამატეთ ტესტი
