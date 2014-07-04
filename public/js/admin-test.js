@@ -35,6 +35,7 @@ addTestApp.controller('addTestCtrl', function ($scope) {
   };
 
   $scope.saveTest = function () {
+    console.log($scope);
     console.log(test);
   };
 

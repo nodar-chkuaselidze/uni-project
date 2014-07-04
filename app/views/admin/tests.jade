@@ -2,7 +2,7 @@ extends logged-layout.jade
 
 block main
   div(ng-app="addTestApp")
-    form#newTest(ng-controller="addTestCtrl", novalidation)
+    form#newTest(ng-controller="addTestCtrl", name="form", novalidation)
       h4 {{test.subject ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
@@ -37,7 +37,7 @@ block main
           a.addTest(href,ng-click="addCase()") + დაამატეთ კითხვა
           br
           br
-          button.btn.btn-default(ng-click="saveTest()") შეინახეთ ტესტი
+          button.btn.btn-default(ng-click="saveTest()", ng-disabled="!form.$valid") შეინახეთ ტესტი
 
   .test-list
     a.btn.btn-default#addTest(href) დაამატეთ ტესტი
