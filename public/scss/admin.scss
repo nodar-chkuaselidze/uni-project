@@ -114,6 +114,14 @@
   .table-hover > tbody > tr {
     cursor: pointer;
   }
+
+  .table-hover td, .table-hover th {
+    text-align: center;
+
+    a {
+      float: none;
+    }
+  }
 }
 
 #newTest {
