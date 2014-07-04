@@ -160,6 +160,11 @@
     margin-bottom: 20px;
     position: relative;
 
+    > .row {
+      width: 90%;
+      margin: auto;
+    }
+
     > .form-group input {
       width: 100%;
     }

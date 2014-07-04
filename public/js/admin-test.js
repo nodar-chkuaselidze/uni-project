@@ -17,7 +17,7 @@ addTestApp.controller('addTestCtrl', function ($scope) {
     }, 0);
   }, true);
 
-  $scope.addTest = function () {
+  $scope.addCase = function () {
     $scope.list.push({
       question : '',
       answers  : [ { correct : false,  text : '' } ],
@@ -26,12 +26,17 @@ addTestApp.controller('addTestCtrl', function ($scope) {
     });
   };
 
+  $scope.removeCase   = function (listItemIndex) {
+    $scope.list.splice(listItemIndex, 1);
+  };
+
   $scope.removeAnswer = function (listItemIndex, answerIndex) {
     $scope.list[listItemIndex].answers.splice(answerIndex, 1);
   };
+
   $scope.saveTest = function () {
     console.log(test);
   };
 
-  $scope.addTest();
+  $scope.addCase();
 });
