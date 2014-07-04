@@ -4,6 +4,7 @@ var express = rapp('lib/express').express,
   router = express.Router(),
   userMiddlewares = rapp('routes/middlewares/user'),
   userControllers = rapp('controllers/user'),
+  moment = require('moment'),
   passport = rapp('lib/passport');
 
 
@@ -28,7 +29,8 @@ router.route('/')
 
       res.render('admin/tests', {
         pageTitle : 'ტესტები',
-        tests     : tests
+        tests     : tests,
+        moment    : moment
       });
     }).catch(function (error) {
       res.end(500);
