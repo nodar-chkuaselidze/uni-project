@@ -22,9 +22,12 @@ form {
       text-align: right;
       width: 4%;
     }
-    .col-sm-11 {
-      width: 96%!important;
+    .col-sm-10 {
+      width: 92%;
       text-align: left;
+    }
+    .col-sm-1.rightAnswer {
+      text-align: right;
     }
   }
 
@@ -55,6 +58,20 @@ form {
         margin-right: 10px;
         margin-top: 10px;
       }
+    }
+  }
+
+  .send {
+    margin-top: 40px;
+    text-align: center;
+
+    button, input {
+      width: 25%;
+      height: 30px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      margin: 0;
+      float: left;
     }
   }
 }
