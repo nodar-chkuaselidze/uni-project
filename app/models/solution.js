@@ -11,20 +11,23 @@ SolutionSchema = new mongoose.Schema({
   ID : {
     unique   : true,
     type     : String,
-    validate : [validator.notEmpty, 'ID შეყვანა აუცილებელია']
+    validate : [
+      { validator : validator.notEmpty, msg : 'ID შეყვანა აუცილებელია' },
+      { validator : validator.isPersonId, msg : 'პერონსალური ID არასწორია' }
+    ]
   },
   firstName : {
     type     : String,
     validate : [
       { validator : validator.notEmpty, msg : 'სახელის შეყვანა აუცილებელია' },
-      { validator : validator.geoAlpha, msg : 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
+      { validator : validator.geoAlpha, msg : 'სახელში გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
     ]
   },
   lastName : {
     type     : String,
     validate : [
-      { validator : validator.notEmpty, msg : 'სახელის შეყვანა აუცილებელია' },
-      { validator : validator.geoAlpha, msg : 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
+      { validator : validator.notEmpty, msg : 'გვარის შეყვანა აუცილებელია' },
+      { validator : validator.geoAlpha, msg : 'გვარში გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
     ]
   },
   answers : {
