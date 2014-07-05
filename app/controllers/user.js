@@ -49,4 +49,8 @@ userController.getTestSolutions = function (test) {
     });
 };
 
+userController.removeTest = function (req) {
+  return Test.removeQ({ _id : req.params.test_id });
+};
+
 exports = module.exports = userController;
