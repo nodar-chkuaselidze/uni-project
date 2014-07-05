@@ -38,7 +38,11 @@ gulp.task('console', function() {
         forceWatch: true,
         quiet: true
     } );
-} );
+});
+
+gulp.task('init', function () {
+  require('./configs/reset.js');
+});
 
 gulp.task('default', ['sass', 'nodemon'], function() {
 });
