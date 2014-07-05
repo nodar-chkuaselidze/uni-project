@@ -51,6 +51,7 @@ block main
           th მაქსიმალური ქულა
           th დამატების თარიღი
           th ლინკი
+          th წაშლა
       tbody
         each test, index in tests
           tr(data-href="/lecturer/test/#{test.id}/")
@@ -61,6 +62,8 @@ block main
             td #{moment(test.createdAt).format('MM.DD.YYYY HH:MM')}
             td
               a(href="/test/#{test.id}/" target="_blank") ტესტი
+            td
+              a(href="/test/remove/#{test.id}/" target="_blank") წაშალე
 
 block scripts
   script(src="/vendor/angular/angular.min.js",type="text/javascript")
