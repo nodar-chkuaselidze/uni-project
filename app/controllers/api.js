@@ -3,6 +3,7 @@
 var apiControllers = {},
     debug = require('debug')('app:controllers:api'),
     Test = rapp('models/test'),
+    Solution = rapp('models/solution'),
     _ = require('lodash'),
     Q = require('q');
 
@@ -63,6 +64,7 @@ apiControllers.addTests = function (req) {
 };
 
 apiControllers.saveSolution = function (req) {
+
   var data = req.body;
 
   return Q.reject({
