@@ -62,9 +62,11 @@ router.get('/test/:test_id/', userMiddlewares.checkLecturer, function (req, res)
     var test = result.test,
       solutions = result.solutions;
 
-    console.log(solutions);
     res.render('admin/test', {
-      pageTitle : 'ტესტი'
+      pageTitle : 'ტესტი - ' + test.subject,
+      test      : test,
+      solutions : solutions,
+      moment    : moment
     });
   })
   .catch(function (error) {
