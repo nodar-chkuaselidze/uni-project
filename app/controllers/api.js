@@ -91,15 +91,24 @@ apiControllers.saveSolution = function (req) {
     return solution.saveQ()
   })
   .then(function (saved) {
-    console.log(saved);
     return 'ტესტი წარმატებით გაიგზავნა';
   })
   .catch(function (error) {
-    console.log(error);
+    if (error.errors) {
+      error.list = [];
+      for(var key in error.errors) {
+        error.list.push(error.errors[key].message);
+      }
 
-    Q.reject({
-      status : 400,
-      list   : [ 'Not Implemented Yet' ]
+      error = {
+        status : 404,
+        list   : error.list
+      };
+    }
+
+    return Q.reject({
+      status : error.status,
+      list   : error.list
     });
   });
 };
