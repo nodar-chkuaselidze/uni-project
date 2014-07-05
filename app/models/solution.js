@@ -8,6 +8,10 @@ var
   Q = require('q'),
 
 SolutionSchema = new mongoose.Schema({
+  testId : {
+    type     : mongoose.Schema.Types.ObjectId,
+    required : true
+  },
   ID : {
     unique   : true,
     type     : String,
