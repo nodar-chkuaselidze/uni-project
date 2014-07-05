@@ -53,7 +53,7 @@ block main
           th ლინკი
       tbody
         each test, index in tests
-          tr(data-href="/admin/test/#{test.id}")
+          tr(data-href="/lecturer/test/#{test.id}/")
             td #{index + 1}
             td #{test.subject}
             td #{test.questions.length}
