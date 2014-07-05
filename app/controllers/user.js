@@ -8,9 +8,11 @@ var userController = {},
     Q = require('q');
 
 userController.getUserTests = function (req) {
-  return Test.findQ({
+  return Test.find({
     owner : req.user.email
   })
+  .sort('-createdAt')
+  .execQ();
 };
 
 userController.getTestById = function (req) {
