@@ -35,7 +35,10 @@ userController.getTestById = function (req) {
 };
 
 userController.getTestSolutions = function (test) {
-  return Solution.findQ({ testId : new mongoose.Types.ObjectId(test._id) }).then(function (solutions) {
+  return Solution.find({ testId : new mongoose.Types.ObjectId(test._id) })
+    .sort('-createdAt')
+    .execQ()
+    .then(function (solutions) {
       return {
         test : test,
         solutions : solutions
