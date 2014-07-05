@@ -9,7 +9,6 @@ var
 
 TestSchema = new mongoose.Schema({
   owner : {
-    unique   : true,
     type     : String,
     required : true,
     validate : [validator.isEmail, 'e-mail არასწორია']
