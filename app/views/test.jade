@@ -7,7 +7,7 @@ block content
        | Test Not found
   - else
     .container-fluid
-      form.form-horizontal.row.col-md-10.col-md-offset-1(method="POST", action="/send-test")
+      form.form-horizontal.row.col-md-10.col-md-offset-1#testForm(method="POST")
         h4 ტესტი - <b>#{test.subject}</b>
         h5 მაქსიმალური ქულა - #{test.maxScore}, კითხვების რაოდენობა - #{test.questions.length}
 
@@ -18,7 +18,7 @@ block content
               | #{index + 1}.
             .col-sm-10
               | #{question.question}
-            .col-sm-1
+            .col-sm-1.rightAnswer
               | #{question.rightAnswer}
           .row.answers.col-sm-10(style="margin: 0px auto 0px auto;float:none;")
             each answer, answerIndex in question.answers
@@ -29,7 +29,10 @@ block content
 
          .row.col-sm-10.col-sm-offset-1.send
            input(type="text", name="ID", placeholder="პირადი ნომერი")
-           input(type="text", name="სახელი", placeholder="სახელი")
-           input(type="text", name="გვარი", placeholder="გვარი")
+           input(type="text", name="firstname", placeholder="სახელი")
+           input(type="text", name="lastname", placeholder="გვარი")
            button.btn.button-default მონაცემების გაგზავნა
       .row.col-md-3
+
+block scripts
+  script(src="/js/test.js", type="text/javascript")
