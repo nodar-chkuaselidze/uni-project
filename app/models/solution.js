@@ -4,24 +4,28 @@ var
   validator = rapp('lib/validator'),
   mongoose = rapp('lib/mongoose'),
   nconf = require('nconf'),
-  debug = require('debug')('app:models:test'),
+  debug = require('debug')('app:models:solution'),
   Q = require('q'),
 
 SolutionSchema = new mongoose.Schema({
   ID : {
     unique   : true,
     type     : String,
-    required : true
+    validate : [validator.notEmpty, 'ID შეყვანა აუცილებელია']
   },
   firstName : {
     type     : String,
-    required : true,
-    validate : [validator.geoAlpha, 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები']
+    validate : [
+      { validator : validator.notEmpty, msg : 'სახელის შეყვანა აუცილებელია' },
+      { validator : validator.geoAlpha, msg : 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
+    ]
   },
   lastName : {
     type     : String,
-    required : true,
-    validate : [validator.geoAlpha, 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები']
+    validate : [
+      { validator : validator.notEmpty, msg : 'სახელის შეყვანა აუცილებელია' },
+      { validator : validator.geoAlpha, msg : 'გამოიყენეთ მხოლოდ ქართული სიმბოლოები'}
+    ]
   },
   answers : {
     type     : Array,
@@ -37,9 +41,34 @@ SolutionSchema = new mongoose.Schema({
     required : true
   },
   deletedAt : {
-    type     : Date,
-    required : true,
+    type     : Date
   }
 });
+
+SolutionSchema.statics.checkAnswers = function (questions, answers) {
+  var score = 0;
+  questions.forEach(function (question, i) {
+    answers[i] = answers[i] !== '' ? answers[i] : [];
+
+    var correctAnswer = true;
+
+    question.answers.forEach(function (answer, j) {
+      answers[i][j] = {
+        correct : answers[i][j] === 'on' ? true : false,
+        text : answer.text
+      };
+
+      if (answers[i][j].correct !== answer.correct) {
+        correctAnswer = false;
+      }
+    });
+
+    if (correctAnswer) {
+      score += question.rightAnswer;
+    }
+  });
+
+  return { score : score, answers : answers };
+};
 
 exports = module.exports = mongoose.model('Solution', SolutionSchema);
