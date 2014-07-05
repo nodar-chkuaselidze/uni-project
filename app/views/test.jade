@@ -8,6 +8,7 @@ block content
   - else
     .container-fluid
       form.form-horizontal.row.col-md-10.col-md-offset-1#testForm(method="POST")
+        input(type="hidden", name="testId", value="#{test._id}")
         h4 ტესტი - <b>#{test.subject}</b>
         h5 მაქსიმალური ქულა - #{test.maxScore}, კითხვების რაოდენობა - #{test.questions.length}
 
@@ -27,6 +28,8 @@ block content
                   input(type="checkbox", name="answer[#{index}][#{answerIndex}]")
                   | #{answer.text}
 
+         .alert.col-sm-10.col-sm-offset-1.hide
+           .alert-text
          .row.col-sm-10.col-sm-offset-1.send
            input(type="text", name="ID", placeholder="პირადი ნომერი")
            input(type="text", name="firstname", placeholder="სახელი")
