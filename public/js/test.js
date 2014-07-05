@@ -9,7 +9,9 @@ $("#testForm").submit(function () {
     dataType : 'json',
     data : data
   }).success(function (data) {
-    console.log(data);
+    alert.removeClass('hide alert-danger').addClass('alert-success');
+
+    alert.find('.alert-text').html(data.message);
   }).error(function (ajax) {
     var errors = ajax.responseJSON;
 
