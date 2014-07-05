@@ -53,6 +53,19 @@ router.get('/logout', userMiddlewares.checkLecturer, function (req, res) {
   res.redirect('/lecturer/');
 });
 
+
+router.get('/test/remove/:test_id/', userMiddlewares.checkLecturer, function (req, res) {
+  console.log('remove test');
+  userController.removeTest(req)
+  .then(function (test) {
+    res.redirect('/lecturer/');
+  })
+  .catch(function (error) {
+    debug(error);
+    res.redirect('/lecturer/');
+  });
+});
+
 router.get('/test/:test_id/', userMiddlewares.checkLecturer, function (req, res) {
   userController.getTestById(req)
   .then(function (test) {
@@ -61,6 +74,13 @@ router.get('/test/:test_id/', userMiddlewares.checkLecturer, function (req, res)
   .then(function (result) {
     var test = result.test,
       solutions = result.solutions;
+
+    if (!test || !solutions) {
+      return Q.reject({
+        status : 404,
+        message : 'არ მოიძებნა'
+      });
+    }
 
     res.render('admin/test', {
       pageTitle : 'ტესტი - ' + test.subject,
@@ -76,5 +96,6 @@ router.get('/test/:test_id/', userMiddlewares.checkLecturer, function (req, res)
     });
   });
 });
+
 
 module.exports = router;
