@@ -1,7 +1,26 @@
 extends logged-layout.jade
 
 block main
-  h3 თქვენი ტესტები
+  h3 ტესტი "<b>#{test.subject}</b>"
+  h4 კითხვების რაოდენობა "#{test.questions.length}", მაქსიმალური ქულა "#{test.maxScore}"
+
+  br
+  h3 ამოხსნები
+  table.table.table-striped
+    thead
+      th პირადი ID
+      th სახელი
+      th გვარი
+      th ქულა
+      th თარიღი
+    tbody
+      each solution in solutions
+        tr
+          td #{solution.ID}
+          td #{solution.firstName}
+          td #{solution.lastName}
+          td #{solution.score}
+          td #{moment(solution.createdAt).format("DD.MM.YYYY HH:MM")}
 
 block scripts
   script(src="/js/admin.js", type="text/javascript")
