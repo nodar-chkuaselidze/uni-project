@@ -81,6 +81,7 @@ apiControllers.saveSolution = function (req) {
       answers  = solutionResults.answers,
       solution = new Solution;
 
+    solution.testId    = req.body.testId;
     solution.ID        = req.body.ID;
     solution.firstName = req.body.firstname;
     solution.lastName  = req.body.lastname;

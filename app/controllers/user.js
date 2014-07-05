@@ -2,7 +2,7 @@
 
 var userController = {},
     Test = rapp('models/test'),
-    Solution = rapp('models/solution');
+    Solution = rapp('models/solution'),
     debug = require('debug')('app:controllers:admin'),
     Q = require('q');
 
