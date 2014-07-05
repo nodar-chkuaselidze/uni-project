@@ -1,17 +1,18 @@
 'use strict';
 
-var userControllers = {},
+var userController = {},
     Test = rapp('models/test'),
+    Solution = rapp('models/solution');
     debug = require('debug')('app:controllers:admin'),
     Q = require('q');
 
-userControllers.getUserTests = function (req) {
+userController.getUserTests = function (req) {
   return Test.findQ({
     owner : req.user.email
   })
 };
 
-userControllers.getTestById = function (req) {
+userController.getTestById = function (req) {
   var error = 'ID არასწორია';
 
   req.checkParams('test_id', error).isHexadecimal();
@@ -30,4 +31,8 @@ userControllers.getTestById = function (req) {
   });
 };
 
-exports = module.exports = userControllers;
+userController.getTestSolutions = function (test) {
+  //Solution.findQ({ testId : test._id })
+};
+
+exports = module.exports = userController;
