@@ -91,7 +91,7 @@ apiControllers.saveSolution = function (req) {
     return solution.saveQ()
   })
   .then(function (saved) {
-    return 'ტესტი წარმატებით გაიგზავნა';
+    return 'ტესტი წარმატებით გაიგზავნა, თქვენი ქულაა ' + saved.score;
   })
   .catch(function (error) {
     if (error.errors) {
@@ -101,8 +101,15 @@ apiControllers.saveSolution = function (req) {
       }
 
       error = {
-        status : 404,
+        status : 400,
         list   : error.list
+      };
+    }
+
+    if (error.name == 'MongoError' && error.code == 11000) {
+      error = {
+        status : 400,
+        list   : [ 'თქვენ უკვე შეავსეთ ტესტი' ]
       };
     }
 
