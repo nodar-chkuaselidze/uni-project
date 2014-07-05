@@ -13,7 +13,6 @@ SolutionSchema = new mongoose.Schema({
     required : true
   },
   ID : {
-    unique   : true,
     type     : String,
     validate : [
       { validator : validator.notEmpty, msg : 'ID შეყვანა აუცილებელია' },
