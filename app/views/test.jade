@@ -1,0 +1,27 @@
+extends partials/layout.jade
+
+block content
+  - if (!test)
+    blockquote
+      p
+       | Test Not found
+  - else
+    .container-fluid
+      form.form-horizontal.row.col-md-8.col-md-offset-2
+        h4 ტესტი - <b>#{test.subject}</b>
+        h5 მაქსიმალური ქულა - #{test.maxScore}, კითხვების რაოდენობა - #{test.questions.length}
+
+        br
+        each question, index in test.questions
+          .row.question.col-sm-offset-1.col-sm-10
+            .col-sm-1
+              | #{index + 1}.
+            .col-sm-11
+              | #{question.question}
+          .row.answers.col-sm-10(style="margin: 0px auto 0px auto;float:none;")
+            each answer in question.answers
+              .row
+                label
+                  input(type="checkbox")
+                  | #{answer.text}
+      .row.col-md-3

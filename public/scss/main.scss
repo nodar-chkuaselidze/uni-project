@@ -1,3 +1,60 @@
-body {
-  background-color: #ccc;
+
+form {
+  margin-top: 20px;
+
+  h4 {
+    text-align: center;
+  }
+
+  h5 {
+    text-align: right;
+  }
+
+  .question {
+    margin-top: 30px;
+    border: 1px solid #5C7883;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+
+    .col-sm-1 {
+      text-align: right;
+      width: 4%;
+    }
+    .col-sm-11 {
+      width: 96%!important;
+      text-align: left;
+    }
+  }
+
+  .answers {
+    float: none;
+    clear: both;
+    margin: auto;
+    border: 1px solid #647D9A;
+    border-top: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px;
+
+    .row {
+      margin: 0px;
+
+      label {
+        padding-bottom: 7px;
+        vertical-align: middle;
+        display: block;
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
+
+      input {
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+    }
+  }
 }
