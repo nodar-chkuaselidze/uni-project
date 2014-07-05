@@ -75,4 +75,12 @@
     $("#newTest").removeClass('hide');
     return false;
   });
+
+  $(".test-list table a").click(function (e) {
+    e.stopPropagation();
+  });
+
+  $(".test-list table > tbody > tr").click(function () {
+    window.location = $(this).data('href');
+  });
 }());
