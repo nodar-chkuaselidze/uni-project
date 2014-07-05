@@ -64,12 +64,43 @@ apiControllers.addTests = function (req) {
 };
 
 apiControllers.saveSolution = function (req) {
+  var data = req.body,
+    testIdError = 'ტესტის ID არასწორია';
 
-  var data = req.body;
+  req.checkBody('testId', testIdError).isHexadecimal().notEmpty();
+  if (!data.answer) {
+    data.answer = [];
+  }
 
-  return Q.reject({
-    status : 400,
-    list   : [ 'Not Implemented Yet' ]
+  return Test.findOneQ({ _id : data.testId })
+  .then(function (test) {
+    return Solution.checkAnswers(test.questions, data.answer);
+  })
+  .then(function (solutionResults) {
+    var score  = solutionResults.score,
+      answers  = solutionResults.answers,
+      solution = new Solution;
+
+    solution.ID        = req.body.ID;
+    solution.firstName = req.body.firstname;
+    solution.lastName  = req.body.lastname;
+    solution.answers   = answers;
+    solution.score     = score;
+    solution.createdAt = Date.now();
+
+    return solution.saveQ()
+  })
+  .then(function (saved) {
+    console.log(saved);
+    return 'ტესტი წარმატებით გაიგზავნა';
+  })
+  .catch(function (error) {
+    console.log(error);
+
+    Q.reject({
+      status : 400,
+      list   : [ 'Not Implemented Yet' ]
+    });
   });
 };
 
