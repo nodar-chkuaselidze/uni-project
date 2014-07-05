@@ -34,5 +34,14 @@ router.post('/add-test', apiMiddlewares.checkLecturer, function (req, res) {
   });
 });
 
+router.post('/send-test', function (req, res) {
+  apiControllers.saveSolution(req)
+    .then(function (feedback) {
+    })
+    .catch(function (error) {
+      res.json(error.status, error.list);
+    });
+});
+
 
 exports = module.exports = router;

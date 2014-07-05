@@ -62,4 +62,13 @@ apiControllers.addTests = function (req) {
   });
 };
 
+apiControllers.saveSolution = function (req) {
+  var data = req.body;
+
+  return Q.reject({
+    status : 400,
+    list   : [ 'Not Implemented Yet' ]
+  });
+};
+
 exports = module.exports = apiControllers;
