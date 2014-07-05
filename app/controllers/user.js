@@ -1,6 +1,7 @@
 'use strict';
 
 var userController = {},
+    mongoose = rapp('lib/mongoose'),
     Test = rapp('models/test'),
     Solution = rapp('models/solution'),
     debug = require('debug')('app:controllers:admin'),
@@ -32,7 +33,20 @@ userController.getTestById = function (req) {
 };
 
 userController.getTestSolutions = function (test) {
-  //Solution.findQ({ testId : test._id })
+  return Solution.findQ({ testId : new mongoose.Types.ObjectId(test._id) }).then(function (solutions) {
+      return {
+        test : test,
+        solutions : solutions
+      };
+    })
+    .catch(function (error) {
+      debug(error);
+
+      return Q.reject({
+        status : 500,
+        error  : [ 'ტესტი არ მოიძებნა' ]
+      });
+    });
 };
 
 exports = module.exports = userController;
