@@ -20,7 +20,7 @@ userControllers.getTestById = function (req) {
   .then(function () {
     var id = req.params.test_id;
 
-    return Test.findQ({ _id : id });
+    return Test.findOneQ({ _id : id });
   })
   .catch(function (error) {
     return Q.reject({
