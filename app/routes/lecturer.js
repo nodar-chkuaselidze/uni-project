@@ -3,7 +3,7 @@
 var express = rapp('lib/express').express,
   router = express.Router(),
   userMiddlewares = rapp('routes/middlewares/user'),
-  userControllers = rapp('controllers/user'),
+  userController = rapp('controllers/user'),
   moment = require('moment'),
   passport = rapp('lib/passport');
 
@@ -20,7 +20,7 @@ router.route('/')
       return;
     }
 
-    userControllers
+    userController
     .getUserTests(req)
     .then(function (tests) {
       if (tests === null) {
@@ -51,6 +51,28 @@ router.get('/password-change', userMiddlewares.checkLecturer, function (req, res
 router.get('/logout', userMiddlewares.checkLecturer, function (req, res) {
   req.logOut();
   res.redirect('/lecturer/');
+});
+
+router.get('/test/:test_id/', userMiddlewares.checkLecturer, function (req, res) {
+  userController.getTestById(req)
+  .then(function (test) {
+    return userController.getTestSolutions(test);
+  })
+  .then(function (result) {
+    var test = result.test,
+      solutions = result.solutions;
+
+    console.log(solutions);
+    res.render('admin/test', {
+      pageTitle : 'ტესტი'
+    });
+  })
+  .catch(function (error) {
+    res.status(error.status);
+    res.render('admin/test', {
+      message : error
+    });
+  });
 });
 
 module.exports = router;
