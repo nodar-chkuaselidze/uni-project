@@ -11,6 +11,10 @@ validator.extend('notEmpty', function (str) {
   return str && str.length > 0;
 });
 
+validator.extend('isPersonId', function (str) {
+  return validator.isNumeric(str) && str.length === 11;
+});
+
 validator.extend('notEquals', function (str, str2) {
   return !validator.equals(str, str2);
 });
