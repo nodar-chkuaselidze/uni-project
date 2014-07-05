@@ -63,7 +63,7 @@ block main
             td
               a(href="/test/#{test.id}/" target="_blank") ტესტი
             td
-              a(href="/test/remove/#{test.id}/" target="_blank") წაშალე
+              a.removeTest(href="/lecturer/test/remove/#{test.id}/") წაშალე
 
 block scripts
   script(src="/vendor/angular/angular.min.js",type="text/javascript")
