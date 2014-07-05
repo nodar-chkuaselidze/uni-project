@@ -2,7 +2,7 @@ extends logged-layout.jade
 
 block main
   div(ng-app="addTestApp")
-    form#newTest(ng-controller="addTestCtrl", name="form", novalidation)
+    form#newTest.hide(ng-controller="addTestCtrl", name="form", novalidation)
       h4 {{test.subject ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
@@ -65,3 +65,4 @@ block main
 block scripts
   script(src="/vendor/angular/angular.min.js",type="text/javascript")
   script(src="/js/admin-test.js", type="text/javascript")
+  script(src="/js/admin.js", type="text/javascript")

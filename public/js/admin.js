@@ -11,6 +11,8 @@
     alertBox = $(".alert[name='change-password']"),
     alertText = alertBox.find('.alert-text');
 
+  if (!changePasswordForm) return;
+
   var checkNewPassword = function (e) {
     if (newPassword.val() != repeatNewPassword.val()) {
       repeatNewPassword.parent().addClass('has-error');
@@ -67,3 +69,10 @@
     return false;
   });
 })();
+
+(function () {
+  $("#addTest").click(function () {
+    $("#newTest").removeClass('hide');
+    return false;
+  });
+}());
