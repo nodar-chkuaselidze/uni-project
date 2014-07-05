@@ -76,6 +76,14 @@
     return false;
   });
 
+  $(".test-list table a.removeTest").click(function (e) {
+    e.stopPropagation();
+
+    var confirm = window.confirm('ნამდვილად გსურთ ტესტის წაშლა ?');
+
+    return confirm;
+  });
+
   $(".test-list table a").click(function (e) {
     e.stopPropagation();
   });
