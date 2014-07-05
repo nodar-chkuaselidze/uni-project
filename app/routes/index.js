@@ -13,7 +13,6 @@ router.get('/', function (req, res) {
 router.get('/test/:test_id/', function (req, res) {
   userController.getTestById(req)
   .then(function (test) {
-    console.log(test);
     res.render('test', {
       test : test
     });
