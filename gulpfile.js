@@ -41,7 +41,7 @@ gulp.task('console', function() {
 });
 
 gulp.task('init', function () {
-  require('./configs/reset.js');
+  require('./configs/init.js');
 });
 
 gulp.task('default', ['sass', 'nodemon'], function() {
