@@ -10,12 +10,13 @@
 
 + პირველ რიგში უნდა დავაყენოთ [Node.JS](http://nodejs.org/download/)
 + ასევე უნდა დავაინსტალიროთ NoSQL მონაცემთა ბაზა [MongoDB](http://www.mongodb.org/downloads).
++ `bower`-ისთვის ასევე უნდა დააყენოთ ვერსიის კონტროლის სისტემა [Git](http://git-scm.com/downloads)
 
 და შემდეგ გადავდივართ უშუალოდ აპლიკაციის ინსტალაციაზე.
 
 `Node.js` დააყენებდა ასევე თავის პაკეტების მართვის სისტემას `npm`, შევიდეთ პროექტის დირექტორიაში ტერმინალიდან და ჩავწეროთ შემდეგი ბრძანებები:
   
-  + `npm install -g gulp nodemon supervisor` (შეიძლება დაჭირდეს `sudo`-ს გამოყენება)
+  + `npm install -g gulp nodemon supervisor bower` (შეიძლება დაჭირდეს `sudo`-ს გამოყენება)
   + `npm install`
   + `bower install`
   + `gulp init` - მონაცემთა ბაზის ინიციალიზება (ქვემოთ)
