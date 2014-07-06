@@ -10,7 +10,7 @@
 
 + პირველ რიგში უნდა დავაყენოთ [Node.JS](http://nodejs.org/download/)
 + ასევე უნდა დავაინსტალიროთ NoSQL მონაცემთა ბაზა [MongoDB](http://www.mongodb.org/downloads).
-+ `bower`-ისთვის ასევე უნდა დააყენოთ ვერსიის კონტროლის სისტემა [Git](http://git-scm.com/downloads)
++ `bower`-ისთვის ასევე უნდა დააყენოთ ვერსიის კონტროლის სისტემა [Git](http://git-scm.com/downloads).
 
 და შემდეგ გადავდივართ უშუალოდ აპლიკაციის ინსტალაციაზე.
 
