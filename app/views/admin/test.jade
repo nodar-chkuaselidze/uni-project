@@ -1,11 +1,14 @@
 extends logged-layout.jade
 
 block main
-  h3 ტესტი "<b>#{test.subject}</b>"
+  h3 ტესტი "<b>#{test.subject}</b>" &nbsp; &nbsp;
+    a.btn.btn-default#addTest(href) შეცვალეთ ტესტი
+    | &nbsp;
+    a.btn.btn-default(href="/test/#{test.id}/" target="_blank") ტესტის გვერდზე გადასვლა
   h4 კითხვების რაოდენობა "#{test.questions.length}", მაქსიმალური ქულა "#{test.maxScore}"
 
   div(ng-app="addTestApp")
-    form#newTest(ng-controller="addTestCtrl", ng-init="test = #{JSON.stringify(test.toJSON())}", name="form", novalidation)
+    form.hide#newTest(ng-controller="addTestCtrl", ng-init="test = #{JSON.stringify(test.toJSON())}", name="form", novalidation)
       h4 {{test.subject ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
       .form-horizontal
         .form-group
