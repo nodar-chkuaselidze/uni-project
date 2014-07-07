@@ -33,7 +33,7 @@ block main
                   span.input-group-addon
                     button(type="button", ng-click="removeAnswer($parent.$index, $index)") X
         .form-group
-          | სულ ტესტი {{list.length | number}}, სულ ქულა {{test.maxScore | number}}
+          | სულ ტესტი {{test.questions.length | number}}, სულ ქულა {{test.maxScore | number}}
           a.addTest(href,ng-click="addCase()") + დაამატეთ კითხვა
           br
           br
