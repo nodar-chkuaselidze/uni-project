@@ -11,7 +11,8 @@ $("#testForm").submit(function () {
   }).success(function (data) {
     alert.removeClass('hide alert-danger').addClass('alert-success');
 
-    alert.find('.alert-text').html(data.message);
+    window.alert(data.message);
+    window.location = '/';
   }).error(function (ajax) {
     var errors = ajax.responseJSON;
 
