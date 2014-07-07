@@ -4,6 +4,44 @@ block main
   h3 ტესტი "<b>#{test.subject}</b>"
   h4 კითხვების რაოდენობა "#{test.questions.length}", მაქსიმალური ქულა "#{test.maxScore}"
 
+  div(ng-app="addTestApp")
+    form#newTest(ng-controller="addTestCtrl", ng-init="test = #{JSON.stringify(test.toJSON())}", name="form", novalidation)
+      h4 {{test.subject ? '' : 'ახალი' }} ტესტი {{test.subject ? '"' + test.subject + '"' : ''}}
+      .form-horizontal
+        .form-group
+          label.col-sm-3.control-label(for="testSubject") საგანი
+          .col-sm-9
+            input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.subject", required)
+        .testCases
+          .testCase.form-inline(ng-repeat="case in test.questions")
+            .row.text-right
+              button(ng-click="removeCase($index)",type="button") X
+            .form-group.col-sm-8.question
+              label.col-sm-4.control-label შეკითხვა \#{{$index + 1}}:
+              .col-sm-8
+                input.form-control(ng-model="case.question", placeholder="შეკითხვა", required)
+            .form-group.col-sm-4.rightAnswer
+              label.col-sm-6.control-label შეფასება:
+              .col-sm-6
+                input.form-control(type="number", ng-model="case.rightAnswer", required, number, min="0")
+            .clear
+
+            .answers
+              a.addAnswer(href, ng-click="case.answers.push({ text : '', correct : false })") დაამატე სავარაუდო პასუხი
+              .row(ng-repeat="answer in case.answers")
+                .input-group(ng-class="answer.correct ? 'has-success' : ''")
+                  span.input-group-addon
+                    input(type="checkbox", ng-model="answer.correct")
+                  input.form-control(type="text", ng-model="answer.text", placeholder="სავარაუდო პასუხი", required)
+                  span.input-group-addon
+                    button(type="button", ng-click="removeAnswer($parent.$index, $index)") X
+        .form-group
+          | სულ ტესტი {{test.questions.length | number}}, სულ ქულა {{test.maxScore | number}}
+          a.addTest(href,ng-click="addCase()") + დაამატეთ კითხვა
+          br
+          br
+          button.btn.btn-default(type="button", ng-click="saveTest()", ng-disabled="!form.$valid") შეინახეთ ტესტი
+
   br
   h3 ამოხსნები
   table.table.table-striped
@@ -23,4 +61,6 @@ block main
           td #{moment(solution.createdAt).format("DD.MM.YYYY HH:mm")}
 
 block scripts
+  script(src="/vendor/angular/angular.min.js",type="text/javascript")
+  script(src="/js/admin-test.js", type="text/javascript")
   script(src="/js/admin.js", type="text/javascript")
