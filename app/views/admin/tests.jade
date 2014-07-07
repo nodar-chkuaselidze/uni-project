@@ -10,7 +10,7 @@ block main
           .col-sm-9
             input.form-control#testSubject(type="text", placeholder="საგანი", ng-model="test.subject", required)
         .testCases
-          .testCase.form-inline(ng-repeat="case in list")
+          .testCase.form-inline(ng-repeat="case in test.questions")
             .row.text-right
               button(ng-click="removeCase($index)",type="button") X
             .form-group.col-sm-8.question
