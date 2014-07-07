@@ -49,7 +49,7 @@ apiControllers.addTests = function (req) {
   test.owner     = req.user.email;
   test.subject   = testData.subject;
   test.maxScore  = testData.maxScore;
-  test.questions = testData.list;
+  test.questions = testData.questions;
   test.createdAt = Date.now();
   test.deletedAt = null;
 
