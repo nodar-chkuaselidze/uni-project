@@ -40,7 +40,7 @@ apiControllers.changePassword = function (req) {
     });
 };
 
-apiControllers.addTests = function (req) {
+apiControllers.addTest = function (req) {
   var testData = req.body,
       test;
 
@@ -48,14 +48,40 @@ apiControllers.addTests = function (req) {
 
   test.owner     = req.user.email;
   test.subject   = testData.subject;
-  test.maxScore  = testData.maxScore;
   test.questions = testData.questions;
   test.createdAt = Date.now();
   test.deletedAt = null;
+  test.maxScore  = testData.questions.reduce(function (prev, curr) {
+      return prev + +curr.rightAnswer;
+  }, 0);
 
   return test.saveQ().then(function () {
     return 'ტესტი შენახულია';
   }).catch(function (errors) {
+    return Q.reject({
+      status : 400,
+      list   : errors
+    });
+  });
+};
+
+apiControllers.updateTest = function (req) {
+  var testData = req.body;
+
+  return Test.findOneQ({ _id : testData._id })
+  .then(function (test) {
+    test.subject   = testData.subject;
+    test.questions = testData.questions;
+    test.maxScore  = testData.questions.reduce(function (prev, curr) {
+        return prev + +curr.rightAnswer;
+    }, 0);
+
+    return test.saveQ();
+  })
+  .then(function (test) {
+    return 'ტესტი განახლდა';
+  })
+  .catch(function (errors) {
     return Q.reject({
       status : 400,
       list   : errors

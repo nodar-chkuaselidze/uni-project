@@ -34,6 +34,19 @@ router.post('/add-test', apiMiddlewares.checkLecturer, function (req, res) {
   });
 });
 
+router.post('/update-test', apiMiddlewares.checkLecturer, function (req, res) {
+  apiControllers.updateTest(req).then(function (text) {
+    res.json(200, { message : text });
+  }).catch(function (error) {
+    if (!error.status || !error.list) {
+      res.json(404, {});
+      return;
+    }
+
+    res.json(error.status, error.list);
+  });
+});
+
 router.post('/send-test', function (req, res) {
   apiControllers.saveSolution(req)
     .then(function (text) {
