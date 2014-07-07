@@ -1,7 +1,6 @@
 var addTestApp = angular.module('addTestApp', []);
 
-addTestApp.controller('addTestCtrl', [ '$scope', '$http', function ($scope, $http) {
-
+addTestApp.controller('addTestCtrl', ['$scope', '$http', function ($scope, $http) {
   $scope.test = {
     subject   : '',
     maxScore  : 0,
@@ -32,7 +31,9 @@ addTestApp.controller('addTestCtrl', [ '$scope', '$http', function ($scope, $htt
   };
 
   $scope.saveTest = function () {
-    $http.post('/api/v1/add-test', $scope.test)
+    var url = $scope.test._id ? '/api/v1/update-test' : '/api/v1/add-test';
+
+    $http.post(url, $scope.test)
       .success(function (data, status) {
         window.location.reload();
       })
@@ -42,4 +43,4 @@ addTestApp.controller('addTestCtrl', [ '$scope', '$http', function ($scope, $htt
   };
 
   $scope.addCase();
-} ]);
+}]);
