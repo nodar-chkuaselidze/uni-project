@@ -11,34 +11,36 @@ var User = rapp('models/user'),
   mongoose = rapp('lib/mongoose'),
   nconf = require('nconf');
 
-User.removeQ({})
-.then(function () {
-  return Test.removeQ({});
-})
-.then(function () {
-  return Solution.removeQ({});
-})
-.then(function () {
-  var defaultUser = nconf.get('admin'),
-    user = new User();
+mongoose.connection.once('open', function () {
+  User.removeQ({})
+  .then(function () {
+    return Test.removeQ({});
+  })
+  .then(function () {
+    return Solution.removeQ({});
+  })
+  .then(function () {
+    var defaultUser = nconf.get('admin'),
+      user = new User();
 
-  for(var field in defaultUser) {
-    user[field] = defaultUser[field];
-  }
+    for(var field in defaultUser) {
+      user[field] = defaultUser[field];
+    }
 
-  user.roles = [ 'authenticated', 'lecturer', 'admin' ];
+    user.roles = [ 'authenticated', 'lecturer', 'admin' ];
 
-  return user.setPassword(user['password']).then(function () {
-    delete user.password;
-    return user.saveQ();
+    return user.setPassword(user['password']).then(function () {
+      delete user.password;
+      return user.saveQ();
+    });
+  })
+  .then(function (user) {
+    console.log('მომხმარებელი წარმატებით დაემატა');
+    console.log(user);
+    mongoose.connection.close();
+  })
+  .catch(function (error) {
+    console.error(error);
+    mongoose.connection.close();
   });
-})
-.then(function (user) {
-  console.log('მომხმარებელი წარმატებით დაემატა');
-  console.log(user);
-  mongoose.connection.close();
-})
-.catch(function (error) {
-  console.error(error);
-  mongoose.connection.close();
 });
