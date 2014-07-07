@@ -44,3 +44,7 @@ mongoose.connection.once('open', function () {
     mongoose.connection.close();
   });
 });
+
+mongoose.connection.on('error', function (error) {
+  console.error(error);
+});
