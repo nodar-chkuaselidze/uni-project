@@ -15,7 +15,7 @@
 და შემდეგ გადავდივართ უშუალოდ აპლიკაციის ინსტალაციაზე.
 
 `Node.js` დააყენებდა ასევე თავის პაკეტების მართვის სისტემას `npm`, შევიდეთ პროექტის დირექტორიაში ტერმინალიდან და ჩავწეროთ შემდეგი ბრძანებები:
-  
+
   + `npm install -g gulp nodemon supervisor bower` (შეიძლება დაჭირდეს `sudo`-ს გამოყენება)
   + `npm install`
   + `bower install`
@@ -32,10 +32,10 @@
   "port" : 5000,
   "db"   : "mongodb://localhost/quizEngine",
   "admin": {
-    "email"     : "nodweber@gmail.com",
-    "firstName" : "ნოდარი",
-    "lastName"  : "ჭკუასელიძე",
-    "password"  : "admin987651234"
+    "email"     : "email@example.com",
+    "firstName" : "სახელი",
+    "lastName"  : "გვარი",
+    "password"  : "paroli"
   },
   "dev-autoAuth" : false
 }
@@ -58,8 +58,8 @@
 სერვერის გაშვება `development`-ში
 ---
 `gulp`, ასევე შეგიძლიათ ნახოთ აპლიკაციის ლოგები თუ რამეს დაამატებთ `DEBUG="app:*" gulp`
- 
- 
+
+
 სერვერის გაშვება `repl`-ში
 ---
-`gulp console` 
+`gulp console`
