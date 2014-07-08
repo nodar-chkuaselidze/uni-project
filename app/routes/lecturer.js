@@ -55,7 +55,6 @@ router.get('/logout', userMiddlewares.checkLecturer, function (req, res) {
 
 
 router.get('/test/remove/:test_id/', userMiddlewares.checkLecturer, function (req, res) {
-  console.log('remove test');
   userController.removeTest(req)
   .then(function (test) {
     res.redirect('/lecturer/');
