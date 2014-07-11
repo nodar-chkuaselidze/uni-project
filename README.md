@@ -64,10 +64,3 @@
 ---
 `gulp console`
 
-
-
-
-
-ფაილები
----
-[პრეზენტაცია](https://drive.google.com/folderview?id=0B_N3jIyJKl-iMjB5NnpIU2E3MmM&usp=drive_web)
