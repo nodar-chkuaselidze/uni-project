@@ -1,31 +1,20 @@
-კომპიუტერიზირებული გამოცდები
+University project
 =====
 
-ეს არის ე.წ. MEAN სტეკის აპლიკაცია.
-(MEAN - MongoDB, Express, Angular, Node.JS)
+This is MEAN stack application.
 
-
-ინსტალაციის ინსტრუქცია
+Installation instructions
 ----
-
-+ პირველ რიგში უნდა დავაყენოთ [Node.JS](http://nodejs.org/download/)
-+ ასევე უნდა დავაინსტალიროთ NoSQL მონაცემთა ბაზა [MongoDB](http://www.mongodb.org/downloads).
-+ `bower`-ისთვის ასევე უნდა დააყენოთ ვერსიის კონტროლის სისტემა [Git](http://git-scm.com/downloads).
-
-და შემდეგ გადავდივართ უშუალოდ აპლიკაციის ინსტალაციაზე.
-
-`Node.js` დააყენებდა ასევე თავის პაკეტების მართვის სისტემას `npm`, შევიდეთ პროექტის დირექტორიაში ტერმინალიდან და ჩავწეროთ შემდეგი ბრძანებები:
-
-  + `npm install -g gulp nodemon supervisor bower` (შეიძლება დაჭირდეს `sudo`-ს გამოყენება)
+  + `npm install -g gulp nodemon supervisor bower` (may need `sudo`)
   + `npm install`
   + `bower install`
-  + `gulp init` - მონაცემთა ბაზის ინიციალიზება (ქვემოთ)
-  + `gulp sass` - css ფაილების გენერირება
+  + `gulp init` - Init DB(below)
+  + `gulp sass` - compile sass files
 
-ლოკალური კონფიგურაცია
+Local configs
 ----
 
-შემდეგ ვქმნით კონფიგურაციის ფაილს `configs/local.json` და ვიყენებთ შაბლონს:
+Now we create config file `configs/local.json` using template:
 
 ```json
 {
@@ -33,34 +22,31 @@
   "db"   : "mongodb://localhost/quizEngine",
   "admin": {
     "email"     : "email@example.com",
-    "firstName" : "სახელი",
-    "lastName"  : "გვარი",
+    "firstName" : "first name",
+    "lastName"  : "last name",
     "password"  : "paroli"
   },
   "dev-autoAuth" : false
 }
 ```
-ეს არის ლოკალური კონფიგურაციისთვის გამოსაყენებელი ფაილი, რომელი ინფორმაციაც მხოლოდ ადმინისტრატორმა უნდა იცოდეს.
 
-+ `admin` - ჩანაწერი გამოიყენება მხოლოდ პირველი მომხმარებლის ინიციალიზებისთვის, შემდეგ სამართავი პანელიდან შესაძლებელია(აუცილებელიც) პაროლის შეცვლა.
-+ `port` - პორტი რომელზეც გაეშვება web სერვერი.
-+ `db` - მონაცემთა ბაზის მისამართი
-+ `dev-autoAuth` - ამ კონფიგურაციას გავლენა აქვს მხოლოდ მაშინ როცა ხართ `development MODE`-ში, ანუ environment variable - `NODE_ENV='development'`, სხვა შემთხვევაში არ აქვს გავლენა. `development mode`-ში ლექტორის პანელში მოხდება ავტომატური ავტორიზაცია.
++ `admin` - This config param is used on DB init, you can change password later from AdminPanel.
++ `port` - Web server port.
++ `db` - MongoDb configuration
++ `dev-autoAuth` - This is boolean param and works only in `development` mode. If set true, you will be automatically authorized to admin panel (for development purposes).
 
-მონაცემთა ბაზის ინიციალიზება
+Init DB
 ---
-საჭიროა მხოლოდ გამოიძახოთ ბრძანება დირექტორიაში ყოფნისას - `gulp init`, ეს შექმნის მთავარ მომხმარებელს რომელსაც `configs/local.json` -ში გაუწერთ.
+You can call `gulp init` to create admin user (based on `configs/local.json`)
 
-სერვერის გაშვება
+Run Server
 ---
-სერვერის გასაშვებად საჭიროა მხოლოდ აკრიფოთ `node app.js` პროექტის დირექტორიიდან.
+It's simple as `node app.js`
 
-სერვერის გაშვება `development`-ში
+Run server in Development MODE
 ---
-`gulp`, ასევე შეგიძლიათ ნახოთ აპლიკაციის ლოგები თუ რამეს დაამატებთ `DEBUG="app:*" gulp`
+You can either run `gulp` or add some DEBUG params like: `DEBUG="app:*" gulp`
 
-
-სერვერის გაშვება `repl`-ში
+Run server in `repl`
 ---
-`gulp console`
-
+`gulp console` - Useful when you want to debug models and helpers. You can access model class/objects directly.
