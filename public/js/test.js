@@ -1,13 +1,15 @@
 $("#testForm").submit(function () {
-  var form = $(this),
-    data = form.serialize(),
-    alert = form.find('.alert');
+  var form = $(this);
+  var rawData = form.serialize();
+  var alert = form.find('.alert');
+
+  rawData = rawData.replace(/&answer%5B\d+%5D=&/g, '&');
 
   $.ajax({
     url : '/api/v1/send-test',
     method : 'POST',
     dataType : 'json',
-    data : data
+    data : rawData
   }).success(function (data) {
     alert.removeClass('hide alert-danger').addClass('alert-success');
 
